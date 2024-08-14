@@ -56,7 +56,7 @@ export default function RecaptchaModal({
               <div className="pt-2">
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey="6LfwO-YpAAAAAKieoqgSahQEg76YLw-FMCak3y3O"
+                  sitekey={import.meta.env.VITE_RECAPTCHA_KEY}
                   onChange={onChange}
                 />
               </div>

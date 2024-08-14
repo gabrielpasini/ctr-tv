@@ -235,7 +235,7 @@ export default function Cadastro() {
               <div className="col-span-6 md:col-span-4">
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey="6LfwO-YpAAAAAKieoqgSahQEg76YLw-FMCak3y3O"
+                  sitekey={import.meta.env.VITE_RECAPTCHA_KEY}
                   onChange={onRecaptchaChange}
                 />
                 {errors.recaptcha && (

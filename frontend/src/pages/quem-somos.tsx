@@ -1,7 +1,13 @@
 export const equipe = [
   {
+    name: "Vovô Bala Tensa",
+    description: `• Streamer;\n• Host do CBRT;\n• Jogador de CTR;`,
+    href: "https://www.youtube.com/c/Vov%C3%B4BalaTensa",
+    imageUrl: "https://i.imgur.com/lzC4Ru6.jpg",
+  },
+  {
     name: 'Gabriel "FAISKA" Pasini',
-    description: `• Desenvolvedor de Software;\n• Engenheiro de computação;`,
+    description: `• Desenvolvedor de Software;\n• Engenheiro de computação;\n• Fã de Crash Bandicoot;\n• Streamer nas horas vagas;`,
     href: "https://pasini.dev",
     imageUrl: "https://github.com/gabrielpasini.png",
   },
