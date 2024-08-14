@@ -1,0 +1,306 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Poppins;
+}
+
+body {
+  background-color: #4383ca;
+}
+
+pre {
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.loader-bg {
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.loader-icon {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  z-index: 1001;
+  color: #fff;
+  animation: downBouncing 0.3s infinite alternate;
+}
+
+.bg-light-blue,
+.hover\:bg-light-blue:hover {
+  background: #d0e6ff;
+}
+
+.bg-dark-blue,
+.hover\:bg-dark-blue:hover {
+  background: #4383ca;
+}
+
+.bg-light-blue-20,
+.hover\:bg-light-blue-20:hover {
+  background: rgba(208, 230, 255, 0.2);
+}
+
+.bg-light-blue-40,
+.hover\:bg-light-blue-40:hover {
+  background: rgba(208, 230, 255, 0.4);
+}
+
+.bg-light-blue-60,
+.hover\:bg-light-blue-60:hover {
+  background: rgba(208, 230, 255, 0.6);
+}
+
+.bg-dark-blue-20,
+.hover\:bg-dark-blue-20:hover {
+  background: rgba(67, 131, 202, 0.2);
+}
+
+.bg-dark-blue-40,
+.hover\:bg-dark-blue-40:hover {
+  background: rgba(67, 131, 202, 0.4);
+}
+
+.bg-dark-blue-60,
+.hover\:bg-dark-blue-60:hover {
+  background: rgba(67, 131, 202, 0.6);
+}
+
+.text-light-blue,
+.hover\:text-light-blue:hover {
+  color: #d0e6ff;
+}
+
+.text-dark-blue,
+.hover\:text-dark-blue:hover {
+  color: #4383ca;
+}
+
+.text-light-blue-20,
+.hover\:text-light-blue-20:hover {
+  color: rgba(208, 230, 255, 0.2);
+}
+
+.text-light-blue-40,
+.hover\:text-light-blue-40:hover {
+  color: rgba(208, 230, 255, 0.4);
+}
+
+.text-light-blue-60,
+.hover\:text-light-blue-60:hover {
+  color: rgba(208, 230, 255, 0.6);
+}
+
+.text-dark-blue-20,
+.hover\:text-dark-blue-20:hover {
+  color: rgba(67, 131, 202, 0.2);
+}
+
+.text-dark-blue-40,
+.hover\:text-dark-blue-40:hover {
+  color: rgba(67, 131, 202, 0.4);
+}
+
+.text-dark-blue-60,
+.hover\:text-dark-blue-60:hover {
+  color: rgba(67, 131, 202, 0.6);
+}
+
+.border-light-blue,
+.focus\:border-light-blue:focus {
+  border-color: #d0e6ff;
+}
+
+.border-dark-blue,
+.focus\:border-dark-blue:focus {
+  border-color: #4383ca;
+}
+
+.border-b-dark-blue {
+  border-bottom: 2px solid #4383ca;
+}
+
+.border-b-light-blue {
+  border-bottom: 2px solid #d0e6ff;
+}
+
+.text-wrap {
+  text-wrap: wrap;
+}
+
+@keyframes downBouncing {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.disabled\:not-allowed {
+  cursor: not-allowed;
+}
+
+.default {
+  cursor: default;
+}
+
+.xs-flex-row {
+  flex-direction: column;
+}
+
+.xs-flex-col {
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .xs-flex-row {
+    flex-direction: row;
+  }
+  .xs-flex-col {
+    flex-direction: column;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #d0e6ff;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(67, 131, 202, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(67, 131, 202, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(67, 131, 202, 0.4);
+}
+
+#snackbar {
+  visibility: hidden;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 999;
+  min-width: 250px;
+  max-width: 400px;
+  min-height: 48px;
+  padding: 12px;
+  text-align: left;
+  border-radius: 8px;
+  right: 8px;
+  top: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  #snackbar {
+    max-width: 90vw;
+  }
+}
+
+#snackbar .icon {
+  display: inline-block;
+  color: #fff;
+  fill: #fff;
+  height: 24px;
+  width: 24px;
+  margin-right: 12px;
+}
+
+#snackbar .message {
+  color: #fff;
+  font-size: 14px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.2s normal ease-in-out,
+    fadeout 0.5s 4.5s normal ease-in-out;
+  animation: fadein 0.2s normal ease-in-out,
+    fadeout 0.5s 4.5s normal ease-in-out;
+}
+
+#snackbar.success {
+  background-color: #388e3c;
+}
+
+#snackbar.error {
+  background-color: #d32f2f;
+}
+
+.bg-success {
+  background-color: #388e3c;
+}
+
+.bg-error {
+  background-color: #d32f2f;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    right: -270px;
+    opacity: 0;
+  }
+  to {
+    right: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    right: -270px;
+    opacity: 0;
+  }
+  to {
+    right: 20px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    right: 20px;
+    opacity: 1;
+  }
+  to {
+    right: -270px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    right: 20px;
+    opacity: 1;
+  }
+  to {
+    right: -270px;
+    opacity: 0;
+  }
+}
