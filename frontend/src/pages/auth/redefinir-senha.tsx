@@ -82,7 +82,7 @@ export default function RedefinirSenha() {
   return (
     <>
       <div className="pt-6 pb-3 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <header className="bg-light-blue rounded-md shadow">
+        <header className="bg-light rounded-md shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 md:px-6 lg:px-8">
             <h1 className="text-xl font-bold text-gray-900">
               Redefinir sua senha
@@ -95,7 +95,7 @@ export default function RedefinirSenha() {
             method="POST"
             onSubmit={handleSubmit(handleChangePassword)}
           >
-            <div className="bg-light-blue shadow overflow-hidden rounded-md">
+            <div className="bg-light shadow overflow-hidden rounded-md">
               <div className="px-4 py-5 md:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 md:col-span-3">
@@ -106,7 +106,7 @@ export default function RedefinirSenha() {
                       type="password"
                       name="password"
                       id="password"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       control={control}
                       error={errors.password}
                       errorMessage={messages.password}
@@ -120,7 +120,7 @@ export default function RedefinirSenha() {
                       type="password"
                       name="confirmPassword"
                       id="confirmPassword"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       control={control}
                       error={errors.confirmPassword}
                       errorMessage={messages.confirmPassword}
@@ -128,10 +128,10 @@ export default function RedefinirSenha() {
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-3 bg-dark-blue-20 md:px-6">
+              <div className="px-4 py-3 bg-dark-20 md:px-6">
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dark-blue hover:bg-dark-blue-60"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-highlight hover:bg-highlight-60"
                 >
                   Salvar
                 </button>

@@ -57,12 +57,13 @@ export default function Login() {
           onComplete={completeLogin}
         />
       )}
-      <div className="bg-light-blue h-screen min-h-full flex items-start justify-center py-12 px-4 md:px-6 lg:px-8">
+      <div className="bg-light h-screen min-h-full flex items-start justify-center py-12 px-4 md:px-6 lg:px-8">
         <div className="max-w-md w-full">
           <div>
             <img
+              style={{ filter: "drop-shadow(8px 8px 10px #222)" }}
               className="mx-auto"
-              src="https://i.imgur.com/X3VIwBC.png"
+              src="https://i.imgur.com/NSVuZuY.png"
               alt="logo"
               width="70%"
             />
@@ -74,7 +75,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => redirect("/")}
-                className="pointer font-medium text-dark-blue hover:text-dark-blue-60"
+                className="pointer font-medium text-highlight hover:text-highlight-40"
               >
                 conheça a plataforma antes
               </button>
@@ -101,7 +102,7 @@ export default function Login() {
                   inputMode="email"
                   autoComplete="off"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-dark-blue focus:z-10 md:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-highlight focus:z-10 md:text-sm"
                   placeholder="E-mail"
                 />
               </div>
@@ -116,14 +117,14 @@ export default function Login() {
                   type="password"
                   autoComplete="off"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:border-dark-blue focus:z-10 md:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:border-highlight focus:z-10 md:text-sm"
                   placeholder="Senha"
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-dark-blue hover:bg-dark-blue-60"
+              className="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-highlight hover:bg-highlight-60"
             >
               Entrar
             </button>
@@ -131,7 +132,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => setShowForgetPasswordModal(true)}
-                className="pointer font-medium text-dark-blue hover:text-dark-blue-60"
+                className="pointer font-medium text-highlight hover:text-highlight-40"
               >
                 Esqueceu sua senha?
               </button>
@@ -142,7 +143,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => redirect("/cadastro")}
-                  className="pointer font-medium text-dark-blue hover:text-dark-blue-60"
+                  className="pointer font-medium text-highlight hover:text-highlight-40"
                 >
                   Cadastre-se!
                 </button>

@@ -147,21 +147,21 @@ export default function EditarPerfil() {
   return (
     <>
       <div className="max-w-7xl pt-4 md:pt-0 mx-auto px-4">
-        <div className="bg-light-blue rounded-md shadow">
+        <div className="bg-light rounded-md shadow">
           <div className="col-span-6 md:col-span-4 pt-2 pb-4 px-4 md:px-6 lg:px-8">
             <RadioButton
               onFieldChange={(event) => setEditMode(event.target.value)}
               fieldValue={editMode}
               name="editMode"
-              className="focus:border-dark-blue h-4 w-4 text-dark-blue border-gray-300"
+              className="focus:border-dark h-4 w-4 text-highlight border-gray-300"
               options={editModeOptions}
             />
           </div>
         </div>
         <div className="mt-5 md:col-span-2">
           {editMode === "dados-pessoais" ? (
-            <div className="bg-light-blue shadow mb-14 overflow-hidden rounded-md">
-              <div className="px-4 py-5 bg-light-blue md:p-6">
+            <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
+              <div className="px-4 py-5 bg-light md:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 md:col-span-4">
                     <Input
@@ -172,7 +172,7 @@ export default function EditarPerfil() {
                       type="text"
                       name="name"
                       id="name"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       error={errors.name}
                       errorMessage={messages.name}
                     />
@@ -187,7 +187,7 @@ export default function EditarPerfil() {
                       inputMode="email"
                       name="email"
                       id="email"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       error={errors.email}
                       errorMessage={messages.email}
                     />
@@ -201,7 +201,7 @@ export default function EditarPerfil() {
                       inputMode="numeric"
                       name="cpf"
                       id="cpf"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       mask="999.999.999-99"
                       error={errors.cpf}
                       errorMessage={messages.cpf}
@@ -216,7 +216,7 @@ export default function EditarPerfil() {
                       inputMode="numeric"
                       name="phone"
                       id="phone"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       mask="(99)99999-9999"
                       error={errors.phone}
                       errorMessage={messages.phone}
@@ -231,19 +231,19 @@ export default function EditarPerfil() {
                   )}
                 </div>
               </div>
-              <div className="px-4 py-3 md:px-6 bg-dark-blue-20 flex items-center justify-between">
+              <div className="px-4 py-3 md:px-6 bg-dark-20 flex items-center justify-between">
                 <button
                   onClick={savePersonalData}
                   type="button"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dark-blue hover:bg-dark-blue-60"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-highlight hover:bg-highlight-60"
                 >
                   Salvar
                 </button>
               </div>
             </div>
           ) : (
-            <div className="shadow bg-light-blue mb-14 overflow-hidden rounded-md">
-              <div className="px-4 py-5 bg-light-blue md:p-6">
+            <div className="shadow bg-light mb-14 overflow-hidden rounded-md">
+              <div className="px-4 py-5 bg-light md:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 md:col-span-4">
                     <Input
@@ -254,7 +254,7 @@ export default function EditarPerfil() {
                       type="password"
                       name="password"
                       id="password"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       error={errors.password}
                       errorMessage={messages.password}
                     />
@@ -270,18 +270,18 @@ export default function EditarPerfil() {
                       type="password"
                       name="confirmPassword"
                       id="confirmPassword"
-                      className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       error={errors.confirmPassword}
                       errorMessage={messages.confirmPassword}
                     />
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-3 md:px-6 bg-dark-blue-20 flex items-center justify-between">
+              <div className="px-4 py-3 md:px-6 bg-dark-20 flex items-center justify-between">
                 <button
                   onClick={savePassword}
                   type="button"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-dark-blue hover:bg-dark-blue-60"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-highlight hover:bg-highlight-60"
                 >
                   Salvar
                 </button>

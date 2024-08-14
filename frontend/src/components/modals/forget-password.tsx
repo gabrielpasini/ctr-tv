@@ -75,8 +75,8 @@ export default function ForgetPassword({ email, open, setOpen }: ModalTypes) {
         >
           &#8203;
         </span>
-        <div className="w-full relative inline-block align-bottom bg-light-blue rounded-lg text-left overflow-hidden shadow-xl transform transition-all md:my-8 md:align-middle md:max-w-lg">
-          <div className="bg-light-blue p-5 pb-4 md:p-6 md:pb-4">
+        <div className="w-full relative inline-block align-bottom bg-light rounded-lg text-left overflow-hidden shadow-xl transform transition-all md:my-8 md:align-middle md:max-w-lg">
+          <div className="bg-light p-5 pb-4 md:p-6 md:pb-4">
             <div className="flex items-center justify-center">
               <div className="w-full text-left">
                 <Dialog.Title
@@ -102,7 +102,7 @@ export default function ForgetPassword({ email, open, setOpen }: ModalTypes) {
                     type="text"
                     name="email"
                     id="email-address"
-                    className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                    className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                     error={errors.email}
                     errorMessage={messages.email}
                   />
@@ -124,10 +124,10 @@ export default function ForgetPassword({ email, open, setOpen }: ModalTypes) {
               </div>
             </div>
           </div>
-          <div className="bg-dark-blue-20 px-4 py-3 md:px-6 md:flex md:flex-row-reverse">
+          <div className="bg-dark-20 px-4 py-3 md:px-6 md:flex md:flex-row-reverse">
             <button
               type="button"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-dark-blue hover:bg-dark-blue-60 md:ml-3 md:w-auto md:text-sm"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-highlight hover:bg-highlight-60 md:ml-3 md:w-auto md:text-sm"
               onClick={() => sendEmail()}
             >
               Enviar

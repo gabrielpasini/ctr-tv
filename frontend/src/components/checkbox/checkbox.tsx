@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/auth";
-
 type Link = {
   label: string;
   href: string;
@@ -25,8 +22,6 @@ export default function Checkbox({
   error,
   errorMessage,
 }: Checkbox) {
-  const { activePath } = useContext(AuthContext);
-
   return (
     <>
       <div className="flex items-center">
@@ -52,7 +47,7 @@ export default function Checkbox({
             <a
               target="_blank"
               href={link.href}
-              className="pointer text-dark-blue hover:underline"
+              className="pointer text-highlight hover:text-highlight-40"
             >
               {link.label}
             </a>

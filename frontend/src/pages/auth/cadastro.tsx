@@ -131,8 +131,8 @@ export default function Cadastro() {
   return (
     <div className="max-w-7xl pt-4 md:pt-0 mx-auto px-4">
       <form action="#" method="POST" onSubmit={handleSubmit(handleRegister)}>
-        <div className="bg-light-blue shadow mb-14 overflow-hidden rounded-md">
-          <div className="px-4 py-5 bg-light-blue md:p-6">
+        <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
+          <div className="px-4 py-5 bg-light md:p-6">
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 md:col-span-4">
                 <Input
@@ -142,7 +142,7 @@ export default function Cadastro() {
                   type="text"
                   name="name"
                   id="name"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   error={errors.name}
                   errorMessage={messages.name}
@@ -157,7 +157,7 @@ export default function Cadastro() {
                   inputMode="email"
                   name="email"
                   id="email"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   error={errors.email}
                   errorMessage={messages.email}
@@ -171,7 +171,7 @@ export default function Cadastro() {
                   type="password"
                   name="password"
                   id="password"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   error={errors.password}
                   errorMessage={messages.password}
@@ -185,7 +185,7 @@ export default function Cadastro() {
                   type="password"
                   name="confirmPassword"
                   id="confirmPassword"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   error={errors.confirmPassword}
                   errorMessage={messages.confirmPassword}
@@ -199,7 +199,7 @@ export default function Cadastro() {
                   inputMode="numeric"
                   name="cpf"
                   id="cpf"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   mask="999.999.999-99"
                   error={errors.cpf}
@@ -214,7 +214,7 @@ export default function Cadastro() {
                   inputMode="numeric"
                   name="phone"
                   id="phone"
-                  className="mt-1 focus:border-dark-blue block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                   control={control}
                   mask="(99)99999-9999"
                   error={errors.phone}
@@ -225,7 +225,7 @@ export default function Cadastro() {
                 <Checkbox
                   value={termsOfUse}
                   setValue={setTermsOfUse}
-                  className="rounded focus:border-dark-blue h-4 w-4 text-dark-blue border-gray-300"
+                  className="rounded focus:border-gray h-4 w-4 text-highlight border-gray-300"
                   label="Li e ceito os "
                   link={{ label: "termos de uso", href: "/termos-de-uso" }}
                   error={errors.termsOfUse}
@@ -248,10 +248,10 @@ export default function Cadastro() {
               </div>
             </div>
           </div>
-          <div className="px-4 py-3 md:px-6 bg-dark-blue-20 flex items-center justify-between">
+          <div className="px-4 py-3 md:px-6 bg-dark-20 flex items-center justify-between">
             <button
               type="submit"
-              className="inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md text-white bg-dark-blue hover:bg-dark-blue-60"
+              className="inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md text-white bg-highlight hover:bg-highlight-40"
             >
               Cadastrar
             </button>
@@ -260,7 +260,7 @@ export default function Cadastro() {
               <button
                 type="button"
                 onClick={() => redirect("/login")}
-                className="pointer font-medium text-dark-blue hover:text-dark-blue-60"
+                className="pointer font-medium text-highlight hover:text-highlight-40"
               >
                 Faça Login
               </button>

@@ -40,8 +40,8 @@ export default function RecaptchaModal({
         >
           &#8203;
         </span>
-        <div className="w-full relative inline-block align-bottom bg-light-blue rounded-lg text-left overflow-hidden shadow-xl transform transition-all md:my-8 md:align-middle md:max-w-lg">
-          <div className="bg-light-blue p-5 pb-4 md:p-6 md:pb-4">
+        <div className="w-full relative inline-block align-bottom bg-light rounded-lg text-left overflow-hidden shadow-xl transform transition-all md:my-8 md:align-middle md:max-w-lg">
+          <div className="bg-light p-5 pb-4 md:p-6 md:pb-4">
             <div className="flex items-center justify-center">
               <div className="w-full text-left">
                 <Dialog.Title
@@ -62,7 +62,7 @@ export default function RecaptchaModal({
               </div>
             )}
           </div>
-          <div className="bg-dark-blue-20 px-4 py-3 md:px-6 md:flex md:flex-row-reverse">
+          <div className="bg-dark-20 px-4 py-3 md:px-6 md:flex md:flex-row-reverse">
             <button
               type="button"
               className="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 mt-2 md:mt-0 md:ml-3 md:w-auto md:text-sm"

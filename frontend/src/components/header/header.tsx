@@ -95,8 +95,8 @@ export default function Header({ setHeight }: HeaderProps) {
   function renderRouteInfo(): ReactElement {
     return (
       <div className="md:hidden w-full min-h-full flex flex-col direction-column items-center justify-center text-center">
-        <h1 className="text-dark-blue font-extrabold">{title}</h1>
-        {subtitle && <h2 className="text-dark-blue-60 text-xs">{subtitle}</h2>}
+        <h1 className="text-dark font-extrabold">{title}</h1>
+        {subtitle && <h2 className="text-dark-60 text-xs">{subtitle}</h2>}
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function Header({ setHeight }: HeaderProps) {
   return (
     <>
       <Container ref={ref}>
-        <Disclosure as="nav" className="bg-light-blue shadow-lg">
+        <Disclosure as="nav" className="bg-light shadow-lg">
           {({ open, close }: any) => (
             <>
               {open
@@ -118,6 +118,7 @@ export default function Header({ setHeight }: HeaderProps) {
                       onClick={() => onClickMenuItem(close, "/")}
                     >
                       <img
+                        style={{ filter: "drop-shadow(4px 4px 4px #222)" }}
                         className="h-8 w-8"
                         src="https://i.imgur.com/TAxIH1J.png"
                         alt="app logo"
@@ -133,8 +134,8 @@ export default function Header({ setHeight }: HeaderProps) {
                             onClick={() => onClickMenuItem(close, item.href)}
                             className={classNames(
                               item.current
-                                ? "default bg-dark-blue text-white"
-                                : "pointer text-dark-blue hover:bg-dark-blue-60 hover:text-white",
+                                ? "default bg-dark-40 text-white"
+                                : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
@@ -149,13 +150,13 @@ export default function Header({ setHeight }: HeaderProps) {
                     {isAuthenticated ? (
                       <Menu as="div" className="pointer ml-3 relative">
                         <div>
-                          <Menu.Button className="max-w-xs bg-dark-blue rounded-full flex items-center text-sm focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-white hover:bg-dark-blue-60">
+                          <Menu.Button className="max-w-xs bg-dark rounded-full flex items-center text-sm focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-white hover:bg-highlight-60">
                             <UserIcon />
                           </Menu.Button>
                         </div>
-                        <MenuItems className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg pt-1 bg-light-blue ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <MenuItems className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg pt-1 bg-light ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
-                            <span className="default text-dark-blue-60 block px-4 py-2 text-sm">
+                            <span className="default text-dark-60 block px-4 py-2 text-sm">
                               Olá {loggedUser?.name}
                             </span>
                           </Menu.Item>
@@ -172,8 +173,8 @@ export default function Header({ setHeight }: HeaderProps) {
                                 }
                                 className={classNames(
                                   item.current
-                                    ? "default bg-dark-blue text-white"
-                                    : "text-dark-blue hover:bg-dark-blue-60 hover:text-white",
+                                    ? "default bg-dark-40 text-white"
+                                    : "text-dark hover:bg-highlight-60 hover:text-white",
                                   "block w-full px-4 py-2 text-sm text-left"
                                 )}
                               >
@@ -188,7 +189,7 @@ export default function Header({ setHeight }: HeaderProps) {
                         <button
                           type="button"
                           onClick={() => onClickMenuItem(close, "/login")}
-                          className="whitespace-nowrap text-base font-medium text-dark-blue hover:text-white"
+                          className="whitespace-nowrap text-base font-medium text-dark hover:text-highlight"
                         >
                           Entrar
                         </button>
@@ -196,7 +197,7 @@ export default function Header({ setHeight }: HeaderProps) {
                           <button
                             type="button"
                             onClick={() => onClickMenuItem(close, "/cadastro")}
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-dark-blue hover:bg-dark-blue-60"
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-dark hover:bg-highlight-60"
                           >
                             Cadastre-se
                           </button>
@@ -204,7 +205,7 @@ export default function Header({ setHeight }: HeaderProps) {
                           <button
                             disabled
                             type="button"
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-dark-blue-40 bg-dark-blue-20"
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-dark-40 bg-dark-20"
                           >
                             Cadastre-se
                           </button>
@@ -215,7 +216,7 @@ export default function Header({ setHeight }: HeaderProps) {
                   {renderRouteInfo()}
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="bg-light-blue inline-flex items-center justify-center p-2 rounded-md text-dark-blue hover:text-white hover:bg-dark-blue">
+                    <Disclosure.Button className="bg-light inline-flex items-center justify-center p-2 rounded-md text-dark hover:text-white hover:bg-highlight-60">
                       {open ? (
                         <XIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -239,8 +240,8 @@ export default function Header({ setHeight }: HeaderProps) {
                         onClick={() => onClickMenuItem(close, item.href)}
                         className={classNames(
                           item.current
-                            ? "default bg-dark-blue text-white"
-                            : "pointer text-dark-blue hover:bg-dark-blue-60 hover:text-white",
+                            ? "default bg-dark-40 text-white"
+                            : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                           "block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                         )}
                       >
@@ -248,9 +249,9 @@ export default function Header({ setHeight }: HeaderProps) {
                       </button>
                     ))}
                   </div>
-                  <div className="pt-4 pb-3 border-t border-dark-blue">
+                  <div className="pt-4 pb-3 border-t border-dark">
                     <div className="flex items-center px-5">
-                      <div className="flex-shrink-0 bg-dark-blue rounded-full flex items-center text-sm">
+                      <div className="flex-shrink-0 bg-dark rounded-full flex items-center text-sm">
                         {isAuthenticated && <UserIcon />}
                       </div>
                       <div className="ml-3">
@@ -273,8 +274,8 @@ export default function Header({ setHeight }: HeaderProps) {
                             }
                             className={classNames(
                               item.current
-                                ? "default bg-dark-blue text-white"
-                                : "pointer text-dark-blue hover:bg-dark-blue-60 hover:text-white",
+                                ? "default bg-dark-40 text-white"
+                                : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                               "block w-full text-left px-3 py-2 rounded-md text-base font-medium"
                             )}
                           >
@@ -289,7 +290,7 @@ export default function Header({ setHeight }: HeaderProps) {
                               onClick={() =>
                                 onClickMenuItem(close, "/cadastro")
                               }
-                              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-dark-blue hover:bg-dark-blue-60"
+                              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-highlight hover:bg-highlight-40"
                             >
                               Cadastre-se
                             </button>
@@ -297,7 +298,7 @@ export default function Header({ setHeight }: HeaderProps) {
                             <button
                               disabled={true}
                               type="button"
-                              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-dark-blue-40 bg-dark-blue-20"
+                              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-dark-40 bg-dark-20"
                             >
                               Cadastre-se
                             </button>
@@ -307,7 +308,7 @@ export default function Header({ setHeight }: HeaderProps) {
                             <button
                               type="button"
                               onClick={() => onClickMenuItem(close, "/login")}
-                              className="text-dark-blue hover:text-dark-blue-60"
+                              className="text-highlight hover:text-highlight-40"
                             >
                               Faça login
                             </button>
@@ -322,12 +323,12 @@ export default function Header({ setHeight }: HeaderProps) {
           )}
         </Disclosure>
         {!navigation.some((route) => route.href === activePath) && (
-          <header className="hidden md:block bg-dark-blue">
+          <header className="hidden md:block bg-dark">
             <div className="max-w-7xl mx-auto px-4 py-2">
               <nav className="flex" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                   <li
-                    className="pointer inline-flex items-center text-sm font-medium text-white hover:text-light-blue"
+                    className="pointer inline-flex items-center text-sm font-medium text-white hover:text-light"
                     onClick={() => redirect("/", true)}
                   >
                     <img
@@ -344,8 +345,8 @@ export default function Header({ setHeight }: HeaderProps) {
                     return (
                       <li
                         key={index}
-                        className={`pointer hover:text-light-blue inline-flex items-center text-sm font-medium text-white ${
-                          isActive && "default hover:none text-light-blue"
+                        className={`pointer hover:text-light inline-flex items-center text-sm font-medium text-white ${
+                          isActive && "default hover:none text-light"
                         }`}
                         onClick={() => !isActive && redirect(path, true)}
                       >
