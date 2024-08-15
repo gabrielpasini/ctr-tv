@@ -1,4 +1,4 @@
-export default function TermosDeUso() {
+export default function TermsOfUse() {
   return (
     <div className="max-w-7xl pt-4 mx-auto px-4 mb-14">
       <div className="mb-2 col-span-6 md:col-span-4 bg-light rounded-md shadow">

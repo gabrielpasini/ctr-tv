@@ -8,7 +8,7 @@ import Checkbox from "../../components/checkbox/checkbox";
 import Cookies from "js-cookie";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Cadastro() {
+export default function Register() {
   const navigate = useNavigate();
   const { setLoggedUser } = useContext(AuthContext);
   const { register, handleSubmit, control } = useForm();

@@ -8,7 +8,7 @@ const query = new URLSearchParams(window.location.search);
 const email = query.get("email");
 const passwordResetToken = query.get("token");
 
-export default function RedefinirSenha() {
+export default function ResetPassword() {
   const navigate = useNavigate();
   const { register, handleSubmit, control } = useForm();
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});

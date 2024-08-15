@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import Axios from "../services/axios";
 import { routes, RouteProps } from "../Routes";
 import Cookies from "js-cookie";
-import { getCookieConsentValue } from "react-cookie-consent";
 
 type AuthenticateDataType = {
   email: string;

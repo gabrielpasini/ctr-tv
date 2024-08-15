@@ -6,15 +6,20 @@ import { AuthContext } from "../../contexts/auth";
 import Axios from "../../services/axios";
 import Cookies from "js-cookie";
 
+const enum EditMode {
+  PERSONAL_DATA = "PERSONAL_DATA",
+  PASSWORD = "PASSWORD",
+}
+
 const editModeOptions = [
-  { label: "Editar Dados pessoais", value: "dados-pessoais" },
-  { label: "Editar Senha", value: "senha" },
+  { label: "Editar Dados pessoais", value: EditMode.PERSONAL_DATA },
+  { label: "Editar Senha", value: EditMode.PASSWORD },
 ];
 
-export default function EditarPerfil() {
+export default function EditProfile() {
   const { setLoggedUser, loggedUser } = useContext(AuthContext);
 
-  const [editMode, setEditMode] = useState("dados-pessoais");
+  const [editMode, setEditMode] = useState(EditMode.PERSONAL_DATA);
 
   const [name, setName] = useState(loggedUser?.name);
   const [cpf, setCpf] = useState(loggedUser?.cpf);
@@ -159,7 +164,7 @@ export default function EditarPerfil() {
           </div>
         </div>
         <div className="mt-5 md:col-span-2">
-          {editMode === "dados-pessoais" ? (
+          {editMode === EditMode.PERSONAL_DATA ? (
             <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
               <div className="px-4 py-5 bg-light md:p-6">
                 <div className="grid grid-cols-6 gap-6">

@@ -1,19 +1,19 @@
-import Login from "./auth/login";
-import Cadastro from "./auth/cadastro";
-import EditarPerfil from "./auth/editar-perfil";
-import RedefinirSenha from "./auth/redefinir-senha";
-import Comunidade from "./comunidade";
-import QuemSomos from "./quem-somos";
 import Home from "./home";
-import TermosDeUso from "./termos-de-uso";
+import Login from "./auth/login";
+import Register from "./auth/register";
+import EditProfile from "./auth/edit-profile";
+import ResetPassword from "./auth/reset-password";
+import Community from "./community";
+import Team from "./team";
+import TermsOfUse from "./terms-of-use";
 
 export {
-  Cadastro,
-  Comunidade,
-  QuemSomos,
   Home,
   Login,
-  EditarPerfil,
-  RedefinirSenha,
-  TermosDeUso,
+  Register,
+  EditProfile,
+  ResetPassword,
+  Community,
+  Team,
+  TermsOfUse,
 };

@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import {
-  Cadastro,
-  Comunidade,
-  EditarPerfil,
   Home,
   Login,
-  RedefinirSenha,
-  TermosDeUso,
-  QuemSomos,
+  Register,
+  EditProfile,
+  ResetPassword,
+  Community,
+  Team,
+  TermsOfUse,
 } from "./pages";
 import PrivateRoute from "./private-route";
 import { ReactElement } from "react";
@@ -23,32 +23,32 @@ export interface RouteProps {
 export const routes: RouteProps[] = [
   { title: "Início", path: "/", element: <Home /> },
   { title: "Login", path: "/login", element: <Login /> },
-  { title: "Cadastro", path: "/cadastro", element: <Cadastro /> },
+  { title: "Cadastro", path: "/cadastro", element: <Register /> },
+  {
+    title: "Editar perfil",
+    path: "/editar-perfil",
+    element: <EditProfile />,
+    private: true,
+  },
   {
     title: "Redefinir senha",
     path: "/redefinir-senha",
-    element: <RedefinirSenha />,
-  },
-  {
-    title: "Termos de uso",
-    path: "/termos-de-uso",
-    element: <TermosDeUso />,
+    element: <ResetPassword />,
   },
   {
     title: "Comunidade",
     path: "/comunidade",
-    element: <Comunidade />,
+    element: <Community />,
   },
   {
     title: "Quem somos",
     path: "/quem-somos",
-    element: <QuemSomos />,
+    element: <Team />,
   },
   {
-    title: "Editar perfil",
-    path: "/editar-perfil",
-    element: <EditarPerfil />,
-    private: true,
+    title: "Termos de uso",
+    path: "/termos-de-uso",
+    element: <TermsOfUse />,
   },
 ];
 

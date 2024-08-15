@@ -1,4 +1,4 @@
-export const equipe = [
+export const team = [
   {
     name: "Vovô Bala Tensa",
     description: `• Streamer;\n• Host do CBRT;\n• Jogador de CTR;`,
@@ -13,27 +13,27 @@ export const equipe = [
   },
 ];
 
-export default function QuemSomos() {
+export default function Team() {
   return (
     <div className="bg-dark w-full h-full">
       <div className="w-full pt-8 px-4 relative max-w-7xl mx-auto md:static">
         <h1 className="text-4xl font font-extrabold tracking-tight text-white md:text-6xl mb-4">
           Quem somos
         </h1>
-        {equipe.map((membro, index) => (
-          <a key={index} target="_blank" href={membro.href}>
+        {team.map((member, index) => (
+          <a key={index} target="_blank" href={member.href}>
             <div className="bg-light md:flex hover:opacity-75 pointer group relative mb-10 min-w-lg lg:mx-auto rounded-md shadow-lg overflow-hidden xs:w-full">
               <img
                 className="sm:w-full md:w-80"
-                src={membro.imageUrl}
-                alt={membro.name}
+                src={member.imageUrl}
+                alt={member.name}
               />
               <pre className="pb-8 md:pb-2 pt-8 px-8">
                 <span className="text-gray-900 block text-2xl font-bold">
-                  {membro.name}
+                  {member.name}
                 </span>
                 <p className="text-gray-500 text-sm mt-2">
-                  {membro.description}
+                  {member.description}
                 </p>
               </pre>
             </div>

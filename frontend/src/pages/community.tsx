@@ -1,4 +1,4 @@
-export default function Comunidade() {
+export default function Community() {
   return (
     <div className="bg-light w-full h-full">
       <div className="pt-8 pb-16 max-w-7xl mx-auto px-4 flex xs-flex-col justify-between">
@@ -12,14 +12,14 @@ export default function Comunidade() {
           <a
             className="mt-10 mb-10 md:mb-0 pointer inline-block text-center rounded-md py-3 px-8 font-medium text-white bg-highlight hover:bg-highlight-60"
             target="_blank"
-            href="https://discord.gg/H32A8jw"
+            href="https://discord.gg/HB3mVw8"
           >
             Participar!
           </a>
         </div>
         <div className="w-full shadow-lg">
           <iframe
-            src="https://discord.com/widget?id=280820416602439690&theme=dark"
+            src="https://discord.com/widget?id=316040253343531008&theme=dark"
             style={{ minHeight: 360 }}
             width="100%"
             height="100%"
