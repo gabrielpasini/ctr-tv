@@ -8,7 +8,7 @@ export const team = [
   {
     name: 'Gabriel "FAISKA" Pasini',
     description: `• Desenvolvedor de Software;\n• Engenheiro de computação;\n• Fã de Crash Bandicoot;\n• Streamer nas horas vagas;`,
-    href: "https://pasini.dev",
+    href: "https://www.youtube.com/c/FAISKAO",
     imageUrl: "https://avatars.githubusercontent.com/u/34244299?v=4",
   },
 ];
