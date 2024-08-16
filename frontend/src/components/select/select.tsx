@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { CustomSelect } from "./styles";
 
-type OptionType = {
+export type OptionType = {
   label: string;
   value: any;
 };

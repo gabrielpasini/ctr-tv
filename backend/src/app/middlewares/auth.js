@@ -1,6 +1,12 @@
 const jwt = require("jsonwebtoken");
 
+const bypassMethods = ["/game/get-all"];
+
 module.exports = (req, res, next) => {
+  if (bypassMethods.includes(req.originalUrl)) {
+    return next();
+  }
+
   const authHeader = req.headers.authorization;
   if (!authHeader)
     return res
