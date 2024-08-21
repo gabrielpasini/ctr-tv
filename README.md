@@ -28,14 +28,14 @@ cd frontend
 
 ou 
 
-```
+```bash
 cd backend
 ```
 
 
 Apos isto instale as dependencias usando o yarn, este processo precisa ser repetido para ambas as pastas:
 
-```bash
+```
 yarn install
 ```
 
@@ -43,7 +43,7 @@ yarn install
 
 O frontend e backend pode ser executado com o seguinte comando nas respectivas pastas de cada um:
 
-```bash
+```
 yarn dev
 ```
 
