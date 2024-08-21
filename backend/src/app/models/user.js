@@ -1,6 +1,27 @@
 const mongoose = require("../../database");
 const bcrypt = require("bcryptjs");
 
+const ProfileSchema = new mongoose.Schema({
+  bio: {
+    type: String,
+  },
+  youtubeUrl: {
+    type: String,
+  },
+  twitchUrl: {
+    type: String,
+  },
+  birthDate: {
+    type: Date,
+  },
+  mainCharacter: {
+    type: [String],
+  },
+  favoriteGame: {
+    type: String,
+  },
+});
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -29,12 +50,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  cpf: {
-    type: String,
-  },
   phone: {
     type: String,
   },
+  profile: ProfileSchema,
 });
 
 UserSchema.pre("save", async function (next) {

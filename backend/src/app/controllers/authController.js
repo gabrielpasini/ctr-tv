@@ -162,22 +162,4 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
-router.post("/delete-account", async (req, res) => {
-  const { id } = req.body;
-  try {
-    await User.findByIdAndDelete(id);
-
-    return res.status(200).send({
-      showMessage: true,
-      success: "Usuário deletado com sucesso",
-    });
-  } catch (err) {
-    return res.status(400).send({
-      showMessage: true,
-      error: "Erro ao deletar a conta, tente novamente",
-      source: err,
-    });
-  }
-});
-
 module.exports = (app) => app.use("/auth", router);

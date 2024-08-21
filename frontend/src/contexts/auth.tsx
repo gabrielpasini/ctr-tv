@@ -17,11 +17,20 @@ type AuthenticateDataType = {
   createdAt?: Date;
 };
 
+type ProfileType = {
+  bio: string;
+  youtubeUrl: string;
+  twitchUrl: string;
+  birthDate: string;
+  mainCharacter: string;
+  favoriteGame: string;
+};
+
 export type LoggedUser = {
   name: string;
   email: string;
-  cpf?: string;
   phone?: string;
+  profile?: ProfileType;
   createdAt?: string;
   _id?: string;
   __v?: any;

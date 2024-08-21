@@ -32,7 +32,7 @@ export default function Register() {
   }
 
   const handleRegister = async (fields: { [key: string]: string }) => {
-    const { confirmPassword, cpf, email, name, password, phone } = fields;
+    const { confirmPassword, email, name, password, phone } = fields;
 
     const errorFields: { [key: string]: boolean } = {};
     const errorMessages: { [key: string]: string } = {};
@@ -85,10 +85,6 @@ export default function Register() {
       errorMessages.confirmPassword =
         "A confirmação de senha precisa ser exatamente igual";
     }
-    if (cpf && cpf.replace(/[^\d]/g, "").length < 11) {
-      errorFields.cpf = true;
-      errorMessages.cpf = "Seu CPF precisa ter 11 digitos";
-    }
     if (phone && phone.replace(/[^\d]/g, "").length < 11) {
       errorFields.phone = true;
       errorMessages.phone = "Seu telefone precisa ter o DDD + 9 digitos";
@@ -116,7 +112,6 @@ export default function Register() {
         email,
         password,
         termsOfUse,
-        cpf: cpf && cpf.replace(/[^\d]/g, ""),
         phone: phone && phone.replace(/[^\d]/g, ""),
       });
       Cookies.set("ctrtv-token", token, { expires: 15 });
@@ -189,21 +184,6 @@ export default function Register() {
                   control={control}
                   error={errors.confirmPassword}
                   errorMessage={messages.confirmPassword}
-                />
-              </div>
-              <div className="col-span-6 md:col-span-4">
-                <Input
-                  label="CPF"
-                  register={register("cpf")}
-                  type="text"
-                  inputMode="numeric"
-                  name="cpf"
-                  id="cpf"
-                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
-                  control={control}
-                  mask="999.999.999-99"
-                  error={errors.cpf}
-                  errorMessage={messages.cpf}
                 />
               </div>
               <div className="col-span-6 md:col-span-4">

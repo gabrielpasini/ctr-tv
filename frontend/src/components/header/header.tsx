@@ -45,7 +45,12 @@ export default function Header({ setHeight }: HeaderProps) {
     { name: "Quem Somos", href: "/quem-somos", current: false },
   ]);
   const [userNavigation, setUserNavigation] = useState<NavItem[]>([
-    { name: "Editar meus dados", href: "/editar-perfil", current: false },
+    {
+      name: "Editar perfil",
+      href: "/editar-perfil",
+      current: false,
+    },
+    { name: "Editar meus dados", href: "/editar-meus-dados", current: false },
     {
       name: "Sair",
       href: "/login",
