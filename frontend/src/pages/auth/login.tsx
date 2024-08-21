@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/auth";
 import RecaptchaModal from "../../components/modals/recaptcha";
 
 type AuthTypes = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -17,7 +17,7 @@ export default function Login() {
   const [showForgetPasswordModal, setShowForgetPasswordModal] =
     useState<boolean>(false);
   const [showRecaptchaModal, setShowRecaptchaModal] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [authData, setAuthData] = useState<AuthTypes>();
 
   function handleSignIn(data: any, event: any) {
@@ -45,7 +45,6 @@ export default function Login() {
     <>
       {showForgetPasswordModal && (
         <ForgetPassword
-          email={email}
           open={showForgetPasswordModal}
           setOpen={setShowForgetPasswordModal}
         />
@@ -89,21 +88,20 @@ export default function Login() {
           >
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  E-mail
+                <label htmlFor="username" className="sr-only">
+                  Nome de usuário
                 </label>
                 <input
-                  {...register("email")}
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  inputMode="email"
+                  {...register("username")}
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  id="username"
+                  name="username"
+                  type="string"
                   autoComplete="off"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-highlight focus:z-10 md:text-sm"
-                  placeholder="E-mail"
+                  placeholder="Nome de usuário"
                 />
               </div>
               <div>

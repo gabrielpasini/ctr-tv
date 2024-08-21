@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import Input from "../../components/input/input";
 import RadioButton from "../../components/radio-button/radio-button";
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext, LoggedUser } from "../../contexts/auth";
 import Axios from "../../services/axios";
 import Cookies from "js-cookie";
 
@@ -16,22 +16,44 @@ const editModeOptions = [
   { label: "Editar Senha", value: EditMode.PASSWORD },
 ];
 
+type PasswordForm = {
+  password?: string;
+  confirmPassword?: string;
+};
+
+const initialPersonalForm = {
+  username: "",
+  name: "",
+  lastname: "",
+  email: "",
+  phone: "",
+};
+
+const initialPasswordForm = {
+  password: "",
+  confirmPassword: "",
+};
+
 export default function EditMyData() {
   const { setLoggedUser, loggedUser } = useContext(AuthContext);
 
+  const [personalForm, setPersonalForm] =
+    useState<LoggedUser>(initialPersonalForm);
+  const [passwordForm, setPasswordForm] =
+    useState<PasswordForm>(initialPasswordForm);
   const [editMode, setEditMode] = useState(EditMode.PERSONAL_DATA);
-
-  const [name, setName] = useState(loggedUser?.name);
-  const [email, setEmail] = useState(loggedUser?.email);
-  const [phone, setPhone] = useState(loggedUser?.phone);
-
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [messages, setMessages] = useState<{ [key: string]: string }>({});
 
+  useEffect(() => {
+    if (loggedUser) {
+      setPersonalForm(loggedUser);
+    }
+  }, [loggedUser]);
+
   const savePassword = async () => {
+    const { password, confirmPassword } = passwordForm;
+
     const errorFields: { [key: string]: boolean } = {};
     const errorMessages: { [key: string]: string } = {};
     if (!password) {
@@ -82,17 +104,37 @@ export default function EditMyData() {
       const token = Cookies.get("ctrtv-token");
       await Axios.put("user/edit-password", {
         token,
-        password: password,
+        password,
       });
     }
   };
 
   const savePersonalData = async () => {
+    const { username, name, lastname, email, phone } = personalForm;
+
     const errorFields: { [key: string]: boolean } = {};
     const errorMessages: { [key: string]: string } = {};
+
+    const usernameFormat = /^[a-zA-Z0-9._-]+$/;
+    if (!username) {
+      errorFields.username = true;
+      errorMessages.username = "Digite um nome de usuário";
+    } else if (username.length < 4 || username.length > 20) {
+      errorFields.username = true;
+      errorMessages.username =
+        "O nome de usuário deve ter entre 4 e 20 caracteres";
+    } else if (!usernameFormat.test(username)) {
+      errorFields.username = true;
+      errorMessages.username =
+        "Nome de usuário inválido! Use apenas letras, números e - _ .";
+    }
     if (!name) {
       errorFields.name = true;
       errorMessages.name = "Digite um nome";
+    }
+    if (!lastname) {
+      errorFields.lastname = true;
+      errorMessages.lastname = "Digite um sobrenome";
     }
     const emailFormat = /\S+@\S+\.\S+/;
     if (!email) {
@@ -108,14 +150,18 @@ export default function EditMyData() {
     }
 
     const legacyData = {
+      username: loggedUser?.username,
       name: loggedUser?.name,
+      lastname: loggedUser?.lastname,
       email: loggedUser?.email,
       phone: loggedUser?.phone,
     };
 
     const newData = {
-      name: name,
-      email: email,
+      username,
+      name,
+      lastname,
+      email,
       phone: phone && phone.replace(/[^\d]/g, ""),
     };
 
@@ -137,6 +183,7 @@ export default function EditMyData() {
         token,
         editedData: newData,
         isEditedEmail: legacyData?.email !== newData?.email,
+        isEditedUsername: legacyData?.username !== newData?.username,
       });
       setLoggedUser(user);
     }
@@ -163,10 +210,34 @@ export default function EditMyData() {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 md:col-span-4">
                     <Input
+                      label="Nome de usuário"
+                      required={true}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          username: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.username}
+                      type="text"
+                      name="username"
+                      id="username"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      error={errors.username}
+                      errorMessage={messages.username}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Input
                       label="Nome"
                       required={true}
-                      onFieldChange={(event) => setName(event.target.value)}
-                      fieldValue={name}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          name: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.name}
                       type="text"
                       name="name"
                       id="name"
@@ -177,10 +248,34 @@ export default function EditMyData() {
                   </div>
                   <div className="col-span-6 md:col-span-4">
                     <Input
+                      label="Sobrenome"
+                      required={true}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          lastname: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.lastname}
+                      type="text"
+                      name="lastname"
+                      id="lastname"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      error={errors.lastname}
+                      errorMessage={messages.lastname}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Input
                       label="E-mail"
                       required={true}
-                      onFieldChange={(event) => setEmail(event.target.value)}
-                      fieldValue={email}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          email: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.email}
                       type="text"
                       inputMode="email"
                       name="email"
@@ -193,8 +288,13 @@ export default function EditMyData() {
                   <div className="col-span-6 md:col-span-4">
                     <Input
                       label="Telefone"
-                      onFieldChange={(event) => setPhone(event.target.value)}
-                      fieldValue={phone}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          phone: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.phone}
                       type="text"
                       inputMode="numeric"
                       name="phone"
@@ -232,8 +332,13 @@ export default function EditMyData() {
                     <Input
                       label="Senha"
                       required={true}
-                      onFieldChange={(event) => setPassword(event.target.value)}
-                      fieldValue={password}
+                      onFieldChange={(event) =>
+                        setPasswordForm((prevForm) => ({
+                          ...prevForm,
+                          password: event.target.value,
+                        }))
+                      }
+                      fieldValue={passwordForm.password}
                       type="password"
                       name="password"
                       id="password"
@@ -247,9 +352,12 @@ export default function EditMyData() {
                       label="Confirmar senha"
                       required={true}
                       onFieldChange={(event) =>
-                        setConfirmPassword(event.target.value)
+                        setPasswordForm((prevForm) => ({
+                          ...prevForm,
+                          confirmPassword: event.target.value,
+                        }))
                       }
-                      fieldValue={confirmPassword}
+                      fieldValue={passwordForm.confirmPassword}
                       type="password"
                       name="confirmPassword"
                       id="confirmPassword"

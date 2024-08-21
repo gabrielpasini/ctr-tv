@@ -12,12 +12,24 @@ function generateToken(id) {
 }
 
 router.post("/register", async (req, res) => {
-  const { email } = req.body;
+  const { email, username } = req.body;
   try {
     if (await User.findOne({ email })) {
       return res.status(400).send({
         showMessage: true,
         error: "Já existe um usuário com este email",
+      });
+    }
+    if (
+      await User.findOne({
+        username: {
+          $regex: `^(?i)${username}$`,
+        },
+      })
+    ) {
+      return res.status(400).send({
+        showMessage: true,
+        error: "Este nome de usuário não está disponível",
       });
     }
     const user = await User.create(req.body);
@@ -37,19 +49,25 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/authenticate", async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({
+      username: {
+        $regex: `^(?i)${username}$`,
+      },
+    }).select("+password");
 
-    if (!user)
+    if (!user) {
       return res
         .status(400)
         .send({ showMessage: true, error: "Usuário não encontrado" });
+    }
 
-    if (!(await bcrypt.compare(password, user.password)))
+    if (!(await bcrypt.compare(password, user.password))) {
       return res
         .status(400)
         .send({ showMessage: true, error: "Senha inválida" });
+    }
 
     user.password = undefined;
 

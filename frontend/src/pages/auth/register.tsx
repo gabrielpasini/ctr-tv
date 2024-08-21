@@ -32,13 +32,39 @@ export default function Register() {
   }
 
   const handleRegister = async (fields: { [key: string]: string }) => {
-    const { confirmPassword, email, name, password, phone } = fields;
+    const {
+      username,
+      name,
+      lastname,
+      email,
+      password,
+      confirmPassword,
+      phone,
+    } = fields;
 
     const errorFields: { [key: string]: boolean } = {};
     const errorMessages: { [key: string]: string } = {};
+
+    const usernameFormat = /^[a-zA-Z0-9._-]+$/;
+    if (!username) {
+      errorFields.username = true;
+      errorMessages.username = "Digite um nome de usuário";
+    } else if (username.length < 4 || username.length > 20) {
+      errorFields.username = true;
+      errorMessages.username =
+        "O nome de usuário deve ter entre 4 e 20 caracteres";
+    } else if (!usernameFormat.test(username)) {
+      errorFields.username = true;
+      errorMessages.username =
+        "Nome de usuário inválido! Use apenas letras, números e - _ .";
+    }
     if (!name) {
       errorFields.name = true;
       errorMessages.name = "Digite um nome";
+    }
+    if (!lastname) {
+      errorFields.lastname = true;
+      errorMessages.lastname = "Digite um sobrenome";
     }
     const emailFormat = /\S+@\S+\.\S+/;
     if (!email) {
@@ -108,10 +134,11 @@ export default function Register() {
       const {
         data: { token, user },
       } = await Axios.post("auth/register", {
+        username,
         name,
+        lastname,
         email,
         password,
-        termsOfUse,
         phone: phone && phone.replace(/[^\d]/g, ""),
       });
       Cookies.set("ctrtv-token", token, { expires: 15 });
@@ -131,6 +158,20 @@ export default function Register() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 md:col-span-4">
                 <Input
+                  label="Nome de usuário"
+                  required={true}
+                  register={register("username")}
+                  type="text"
+                  name="username"
+                  id="username"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  control={control}
+                  error={errors.username}
+                  errorMessage={messages.username}
+                />
+              </div>
+              <div className="col-span-6 md:col-span-4">
+                <Input
                   label="Nome"
                   required={true}
                   register={register("name")}
@@ -141,6 +182,20 @@ export default function Register() {
                   control={control}
                   error={errors.name}
                   errorMessage={messages.name}
+                />
+              </div>
+              <div className="col-span-6 md:col-span-4">
+                <Input
+                  label="Sobrenome"
+                  required={true}
+                  register={register("lastname")}
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                  control={control}
+                  error={errors.lastname}
+                  errorMessage={messages.lastname}
                 />
               </div>
               <div className="col-span-6 md:col-span-4">

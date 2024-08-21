@@ -11,7 +11,7 @@ import { routes, RouteProps } from "../Routes";
 import Cookies from "js-cookie";
 
 type AuthenticateDataType = {
-  email: string;
+  username: string;
   password: string;
   id?: string;
   createdAt?: Date;
@@ -27,7 +27,9 @@ type ProfileType = {
 };
 
 export type LoggedUser = {
+  username: string;
   name: string;
+  lastname: string;
   email: string;
   phone?: string;
   profile?: ProfileType;
@@ -84,12 +86,12 @@ export const AuthProvider: any = ({ children }: any) => {
     }
   };
 
-  async function authenticate({ email, password }: AuthenticateDataType) {
+  async function authenticate({ username, password }: AuthenticateDataType) {
     try {
       const {
         data: { token, user },
       } = await Axios.post("/auth/authenticate", {
-        email,
+        username,
         password,
       });
 

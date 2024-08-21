@@ -6,15 +6,14 @@ import Input from "../input/input";
 import { validateEmail } from "../../services/string";
 
 type ModalTypes = {
-  email: string;
   open: boolean;
   setOpen: (data: boolean) => any;
 };
 
-export default function ForgetPassword({ email, open, setOpen }: ModalTypes) {
+export default function ForgetPassword({ open, setOpen }: ModalTypes) {
   const recaptchaRef = createRef<ReCAPTCHA>();
   const cancelButtonRef = useRef(null);
-  const [emailToSend, setEmailToSend] = useState<string>(email || "");
+  const [emailToSend, setEmailToSend] = useState<string>("");
   const [isRecaptchaValid, setIsRecaptchaValid] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [messages, setMessages] = useState<{ [key: string]: string }>({});

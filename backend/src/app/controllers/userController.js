@@ -34,7 +34,7 @@ router.get("/get-user", async (req, res) => {
 });
 
 router.put("/edit-user", async (req, res) => {
-  const { token, editedData, isEditedEmail } = req.body;
+  const { token, editedData, isEditedEmail, isEditedUsername } = req.body;
   try {
     const userId = await jwt.verify(
       token,
@@ -50,15 +50,25 @@ router.put("/edit-user", async (req, res) => {
 
     const editedFields = { ...editedData };
 
-    if (isEditedEmail) {
-      if (await User.findOne({ email: editedFields.email })) {
-        return res.status(400).send({
-          showMessage: true,
-          error: "Já existe um usuário com este email",
-        });
-      }
-      const now = new Date();
-      now.setHours(now.getHours() + 24);
+    if (isEditedEmail && (await User.findOne({ email: editedFields.email }))) {
+      return res.status(400).send({
+        showMessage: true,
+        error: "Já existe um usuário com este email",
+      });
+    }
+
+    if (
+      isEditedUsername &&
+      (await User.findOne({
+        username: {
+          $regex: `^(?i)${editedFields.username}$`,
+        },
+      }))
+    ) {
+      return res.status(400).send({
+        showMessage: true,
+        error: "Este nome de usuário não está disponível",
+      });
     }
 
     await User.findByIdAndUpdate(userId, {

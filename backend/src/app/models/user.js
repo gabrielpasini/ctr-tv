@@ -23,8 +23,9 @@ const ProfileSchema = new mongoose.Schema({
 });
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
+    unique: true,
     required: true,
   },
   email: {
@@ -32,6 +33,14 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true,
     lowercase: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
   },
   password: {
     type: String,
