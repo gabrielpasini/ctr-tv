@@ -1,6 +1,8 @@
-# Instruções de Instalação de Dependências
+# 🏁 CTR-TV
 
-Este projeto de website tem como foco o desenvolvimento de um site para organização de torneios de crash team racing online.
+Este projeto tem como foco o desenvolvimento de um website e api para organização de torneios de Crash Team Racing.
+
+## Instruções de Instalação de Dependências
 
 Este projeto é dividido em duas partes: **frontend** e **backend**. Cada parte tem suas próprias dependências que precisam ser instaladas.
 
@@ -36,7 +38,7 @@ cd backend
 Apos isto instale as dependencias usando o yarn, este processo precisa ser repetido para ambas as pastas:
 
 ```
-yarn install
+yarn
 ```
 
 ## 3. Rodando o projeto
@@ -48,5 +50,4 @@ yarn dev
 ```
 
 ### 4. Trabalhos futuros
-
-Integração com ctr online para fins de feedback em tempo real por meio de uma api.
+- Integração com o CTR Online para fins de feedback em tempo real por meio de uma api.
