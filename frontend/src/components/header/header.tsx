@@ -162,7 +162,7 @@ export default function Header({ setHeight }: HeaderProps) {
                         <MenuItems className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg pt-1 bg-light ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             <span className="default text-dark-60 block px-4 py-2 text-sm">
-                              Olá {loggedUser?.name}
+                              Olá {loggedUser?.username}
                             </span>
                           </Menu.Item>
                           {userNavigation.map((item: NavItem) => (
