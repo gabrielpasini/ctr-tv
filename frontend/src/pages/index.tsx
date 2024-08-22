@@ -1,7 +1,8 @@
 import Home from "./home";
 import Login from "./auth/login";
 import Register from "./auth/register";
-import EditProfile from "./auth/edit-profile";
+import Profile from "./profile/profile";
+import EditProfile from "./profile/edit-profile";
 import EditMyData from "./auth/edit-my-data";
 import ResetPassword from "./auth/reset-password";
 import Community from "./community";
@@ -13,6 +14,7 @@ export {
   Home,
   Login,
   Register,
+  Profile,
   EditProfile,
   EditMyData,
   ResetPassword,

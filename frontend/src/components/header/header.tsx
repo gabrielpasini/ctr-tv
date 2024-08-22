@@ -21,9 +21,23 @@ type HeaderProps = {
 type NavItem = {
   name: string;
   href: string;
-  current: boolean;
   canSignOut?: boolean;
 };
+
+const initialUserNavigation = [
+  { name: "Editar meus dados", href: "/editar-meus-dados" },
+  {
+    name: "Sair",
+    href: "/login",
+    canSignOut: true,
+  },
+];
+
+const navigation = [
+  { name: "Início", href: "/" },
+  { name: "Comunidade", href: "/comunidade" },
+  { name: "Quem Somos", href: "/quem-somos" },
+];
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
@@ -39,31 +53,27 @@ export default function Header({ setHeight }: HeaderProps) {
     return path;
   });
   const ref = useRef<HTMLDivElement>(null);
-  const [navigation, setNavigation] = useState<NavItem[]>([
-    { name: "Início", href: "/", current: false },
-    { name: "Comunidade", href: "/comunidade", current: false },
-    { name: "Quem Somos", href: "/quem-somos", current: false },
-  ]);
-  const [userNavigation, setUserNavigation] = useState<NavItem[]>([
-    {
-      name: "Perfil",
-      href: "/perfil",
-      current: false,
-    },
-    { name: "Editar meus dados", href: "/editar-meus-dados", current: false },
-    {
-      name: "Sair",
-      href: "/login",
-      canSignOut: true,
-      current: false,
-    },
-  ]);
+  const [userNavigation, setUserNavigation] = useState<NavItem[]>(
+    initialUserNavigation
+  );
 
   useEffect(() => {
     setHeight(ref?.current?.clientHeight);
   }, []);
 
-  const redirect = (route: string, fromBreadcrumb?: boolean) => {
+  useEffect(() => {
+    if (loggedUser) {
+      setUserNavigation((prevNav) => [
+        {
+          name: "Meu perfil",
+          href: `/perfil/${loggedUser.username}`,
+        },
+        ...prevNav,
+      ]);
+    }
+  }, [loggedUser]);
+
+  const redirect = (route: string) => {
     if (activePath !== route) {
       navigate(route);
     }
@@ -81,21 +91,6 @@ export default function Header({ setHeight }: HeaderProps) {
     }
     close();
   };
-
-  useEffect(() => {
-    const newNavigation = navigation.map((route: NavItem) => {
-      if (route.href === activePath) route.current = true;
-      else route.current = false;
-      return route;
-    });
-    const newUserNavigation = userNavigation.map((route: NavItem) => {
-      if (route.href === activePath) route.current = true;
-      else route.current = false;
-      return route;
-    });
-    setNavigation(newNavigation);
-    setUserNavigation(newUserNavigation);
-  }, [activePath]);
 
   function renderRouteInfo(): ReactElement {
     return (
@@ -138,12 +133,14 @@ export default function Header({ setHeight }: HeaderProps) {
                             key={item.name}
                             onClick={() => onClickMenuItem(close, item.href)}
                             className={classNames(
-                              item.current
+                              activePath === item.href
                                 ? "default bg-dark-40 text-white"
                                 : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium"
                             )}
-                            aria-current={item.current ? "page" : undefined}
+                            aria-current={
+                              activePath === item.href ? "page" : undefined
+                            }
                           >
                             {item.name}
                           </div>
@@ -177,7 +174,7 @@ export default function Header({ setHeight }: HeaderProps) {
                                   )
                                 }
                                 className={classNames(
-                                  item.current
+                                  activePath === item.href
                                     ? "default bg-dark-40 text-white"
                                     : "text-dark hover:bg-highlight-60 hover:text-white",
                                   "block w-full px-4 py-2 text-sm text-left"
@@ -244,7 +241,7 @@ export default function Header({ setHeight }: HeaderProps) {
                         key={item.name}
                         onClick={() => onClickMenuItem(close, item.href)}
                         className={classNames(
-                          item.current
+                          activePath === item.href
                             ? "default bg-dark-40 text-white"
                             : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                           "block w-full text-left px-3 py-2 rounded-md text-base font-medium"
@@ -278,7 +275,7 @@ export default function Header({ setHeight }: HeaderProps) {
                               onClickMenuItem(close, item.href, item.canSignOut)
                             }
                             className={classNames(
-                              item.current
+                              activePath === item.href
                                 ? "default bg-dark-40 text-white"
                                 : "pointer text-dark hover:bg-highlight-60 hover:text-white",
                               "block w-full text-left px-3 py-2 rounded-md text-base font-medium"
@@ -334,7 +331,7 @@ export default function Header({ setHeight }: HeaderProps) {
                 <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                   <li
                     className="pointer inline-flex items-center text-sm font-medium text-white hover:text-light"
-                    onClick={() => redirect("/", true)}
+                    onClick={() => redirect("/")}
                   >
                     <img
                       src="/assets/icons/home.svg"
@@ -353,7 +350,7 @@ export default function Header({ setHeight }: HeaderProps) {
                         className={`pointer hover:text-light inline-flex items-center text-sm font-medium text-white ${
                           isActive && "default hover:none text-light"
                         }`}
-                        onClick={() => !isActive && redirect(path, true)}
+                        onClick={() => !isActive && redirect(path)}
                       >
                         <img
                           src="/assets/icons/arrow-right.svg"

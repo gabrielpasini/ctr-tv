@@ -10,6 +10,7 @@ import {
   TermsOfUse,
   CreateTournament,
   EditProfile,
+  Profile,
 } from "./pages";
 import PrivateRoute from "./private-route";
 import { ReactElement } from "react";
@@ -31,6 +32,11 @@ export const routes: RouteProps[] = [
     path: "/editar-meus-dados",
     element: <EditMyData />,
     private: true,
+  },
+  {
+    title: "Perfil",
+    path: "/perfil/:username",
+    element: <Profile />,
   },
   {
     title: "Editar perfil",
