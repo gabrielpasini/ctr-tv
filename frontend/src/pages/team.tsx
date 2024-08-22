@@ -22,13 +22,13 @@ export default function Team() {
         </h1>
         {team.map((member, index) => (
           <a key={index} target="_blank" href={member.href}>
-            <div className="bg-light md:flex hover:opacity-75 pointer group relative mb-10 min-w-lg lg:mx-auto rounded-md shadow-lg overflow-hidden xs:w-full">
+            <div className="bg-light w-full flex flex-row direction-row items-center hover:opacity-75 group relative mb-10 lg:mx-auto rounded-md shadow-lg overflow-hidden">
               <img
-                className="sm:w-full md:w-80"
+                className="ml-4 my-4 md:ml-0 md:my-0 w-40 h-40 rounded-full md:rounded-none"
                 src={member.imageUrl}
                 alt={member.name}
               />
-              <pre className="pb-8 md:pb-2 pt-8 px-8">
+              <pre className="pb-4 pt-4 px-8">
                 <span className="text-gray-900 block text-2xl font-bold">
                   {member.name}
                 </span>

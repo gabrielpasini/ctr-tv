@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <div className="min-h-full">
-      <div className="pt-8 pb-16 max-w-7xl mx-auto px-4 flex xs-flex-col justify-between">
-        <div className="md:max-w-lg md:pr-8">
+      <div className="pt-8 max-w-7xl mx-auto px-4 flex xs-flex-col justify-between">
+        <div className="md:max-w-lg">
           <h1 className="font-crash text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
             Torneios
           </h1>
