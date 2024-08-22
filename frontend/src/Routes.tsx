@@ -35,7 +35,7 @@ export const routes: RouteProps[] = [
   },
   {
     title: "Perfil",
-    path: "/perfil/:username",
+    path: "/perfil",
     element: <Profile />,
   },
   {

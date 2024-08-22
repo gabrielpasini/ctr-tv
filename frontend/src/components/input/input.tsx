@@ -42,6 +42,8 @@ export default function Input({
   fieldValue,
   labelColor,
 }: InputProps): ReactElement {
+  const classNameNoRing = `${className} focus:outline-none focus:ring-0`;
+
   const handleChange = (onChange: any, event: any) => {
     const value = event.target.value;
     if (inputMode === "numeric") {
@@ -85,7 +87,7 @@ export default function Input({
                 inputMode={inputMode}
                 name={name}
                 id={id}
-                className={className}
+                className={classNameNoRing}
                 error={error}
                 onChange={onFieldChange}
                 value={fieldValue}
@@ -106,7 +108,7 @@ export default function Input({
             inputMode={inputMode}
             name={name}
             id={id}
-            className={className}
+            className={classNameNoRing}
             error={error}
           />
         </InputMask>
@@ -123,7 +125,7 @@ export default function Input({
               placeholder={placeholder}
               name={name}
               id={id}
-              className={className}
+              className={classNameNoRing}
               error={error}
               onChange={(event) => handleChange(onChange, event)}
               value={value}
@@ -138,7 +140,7 @@ export default function Input({
           placeholder={placeholder}
           name={name}
           id={id}
-          className={className}
+          className={classNameNoRing}
           error={error}
           onChange={(event) => handleChange(onFieldChange, event)}
           value={fieldValue}

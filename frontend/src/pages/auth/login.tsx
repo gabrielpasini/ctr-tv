@@ -100,7 +100,7 @@ export default function Login() {
                   type="string"
                   autoComplete="off"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-highlight focus:z-10 md:text-sm"
+                  className="focus:outline-none focus:ring-0 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:border-highlight focus:z-10 md:text-sm"
                   placeholder="Nome de usuário"
                 />
               </div>
@@ -115,7 +115,7 @@ export default function Login() {
                   type="password"
                   autoComplete="off"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:border-highlight focus:z-10 md:text-sm"
+                  className="focus:outline-none focus:ring-0 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:border-highlight focus:z-10 md:text-sm"
                   placeholder="Senha"
                 />
               </div>
