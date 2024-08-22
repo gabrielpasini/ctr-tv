@@ -3,7 +3,6 @@ import {
   Home,
   Login,
   Register,
-  EditMyData,
   ResetPassword,
   Community,
   Team,
@@ -28,21 +27,15 @@ export const routes: RouteProps[] = [
   { title: "Login", path: "/login", element: <Login /> },
   { title: "Cadastro", path: "/cadastro", element: <Register /> },
   {
-    title: "Editar dados",
-    path: "/editar-meus-dados",
-    element: <EditMyData />,
+    title: "Editar perfil",
+    path: "/editar-perfil",
+    element: <EditProfile />,
     private: true,
   },
   {
     title: "Perfil",
     path: "/perfil",
     element: <Profile />,
-  },
-  {
-    title: "Editar perfil",
-    path: "/editar-perfil",
-    element: <EditProfile />,
-    private: true,
   },
   {
     title: "Redefinir senha",

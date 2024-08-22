@@ -5,6 +5,8 @@ import RadioButton from "../../components/radio-button/radio-button";
 import { AuthContext, LoggedUser } from "../../contexts/auth";
 import Axios from "../../services/axios";
 import Cookies from "js-cookie";
+import { Game } from "../tournament/create-tournament";
+import Select, { OptionType } from "../../components/select/select";
 
 const enum EditMode {
   PERSONAL_DATA = "PERSONAL_DATA",
@@ -27,6 +29,7 @@ const initialPersonalForm = {
   lastname: "",
   email: "",
   phone: "",
+  birthDate: "",
 };
 
 const initialPasswordForm = {
@@ -34,7 +37,7 @@ const initialPasswordForm = {
   confirmPassword: "",
 };
 
-export default function EditMyData() {
+export default function EditProfile() {
   const { setLoggedUser, loggedUser } = useContext(AuthContext);
 
   const [personalForm, setPersonalForm] =
@@ -42,14 +45,38 @@ export default function EditMyData() {
   const [passwordForm, setPasswordForm] =
     useState<PasswordForm>(initialPasswordForm);
   const [editMode, setEditMode] = useState(EditMode.PERSONAL_DATA);
+  const [games, setGames] = useState<OptionType[]>([{ label: "", value: "" }]);
+
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [messages, setMessages] = useState<{ [key: string]: string }>({});
+
+  console.log(personalForm);
+
+  useEffect(() => {
+    getGames();
+  }, []);
 
   useEffect(() => {
     if (loggedUser) {
       setPersonalForm(loggedUser);
     }
   }, [loggedUser]);
+
+  async function getGames() {
+    const {
+      data: { games },
+    }: any = await Axios.get("game/get-all");
+    setGames([
+      {
+        label: "",
+        value: "",
+      },
+      ...games.map((game: Game) => ({
+        label: `${game.name} - ${game.releaseYear}`,
+        value: game._id,
+      })),
+    ]);
+  }
 
   const savePassword = async () => {
     const { password, confirmPassword } = passwordForm;
@@ -110,11 +137,15 @@ export default function EditMyData() {
   };
 
   const savePersonalData = async () => {
-    const { username, name, lastname, email, phone } = personalForm;
+    const { username, name, lastname, email, phone, birthDate, profile } =
+      personalForm;
+    const { bio, youtubeUrl, twitchUrl, mainCharacters, favoriteGame } =
+      profile ?? {};
 
     const errorFields: { [key: string]: boolean } = {};
     const errorMessages: { [key: string]: string } = {};
 
+    // PERSONAL DATA
     const usernameFormat = /^[a-zA-Z0-9._-]+$/;
     if (!username) {
       errorFields.username = true;
@@ -148,6 +179,25 @@ export default function EditMyData() {
       errorFields.phone = true;
       errorMessages.phone = "Seu telefone precisa ter o DDD + 9 digitos";
     }
+    const birthDateFormat =
+      /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    if (birthDate && !birthDateFormat.test(birthDate)) {
+      errorFields.birthDate = true;
+      errorMessages.birthDate = "A data está inválida";
+    }
+    // PROFILE
+    const youtubeUrlFormat =
+      /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:user\/|channel\/|c\/|@)([a-zA-Z0-9_-]+)$/;
+    if (youtubeUrl && !youtubeUrlFormat.test(youtubeUrl)) {
+      errorFields.youtubeUrl = true;
+      errorMessages.youtubeUrl = "A url está inválida";
+    }
+    const twitchUrlFormat =
+      /^(?:https?:\/\/)?(?:www\.)?(?:twitch\.tv|twitch\.com)\/([a-zA-Z0-9_]+)$/;
+    if (twitchUrl && !twitchUrlFormat.test(twitchUrl)) {
+      errorFields.twitchUrl = true;
+      errorMessages.twitchUrl = "A url está inválida";
+    }
 
     const legacyData = {
       username: loggedUser?.username,
@@ -155,6 +205,14 @@ export default function EditMyData() {
       lastname: loggedUser?.lastname,
       email: loggedUser?.email,
       phone: loggedUser?.phone,
+      birthDate: loggedUser?.birthDate,
+      profile: {
+        bio: loggedUser?.profile?.bio,
+        youtubeUrl: loggedUser?.profile?.youtubeUrl,
+        twitchUrl: loggedUser?.profile?.twitchUrl,
+        mainCharacters: loggedUser?.profile?.mainCharacters,
+        favoriteGame: loggedUser?.profile?.favoriteGame,
+      },
     };
 
     const newData = {
@@ -163,6 +221,14 @@ export default function EditMyData() {
       lastname,
       email,
       phone: phone && phone.replace(/[^\d]/g, ""),
+      birthDate,
+      profile: {
+        bio,
+        youtubeUrl,
+        twitchUrl,
+        mainCharacters,
+        favoriteGame,
+      },
     };
 
     if (JSON.stringify(legacyData) === JSON.stringify(newData)) {
@@ -303,6 +369,93 @@ export default function EditMyData() {
                       mask="(99)99999-9999"
                       error={errors.phone}
                       errorMessage={messages.phone}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Input
+                      label="Data de nascimento"
+                      placeholder="DD/MM/AAAA"
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          birthDate: event.target.value,
+                        }))
+                      }
+                      fieldValue={personalForm.birthDate}
+                      type="text"
+                      name="birthDate"
+                      id="birthDate"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      mask="99/99/9999"
+                      error={errors.birthDate}
+                      errorMessage={messages.birthDate}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Input
+                      label="Youtube"
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          profile: {
+                            ...prevForm.profile,
+                            youtubeUrl: event.target.value,
+                          },
+                        }))
+                      }
+                      fieldValue={personalForm.profile?.youtubeUrl}
+                      placeholder="Insira a url do seu canal"
+                      type="text"
+                      name="youtubeUrl"
+                      id="youtubeUrl"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      error={errors.youtubeUrl}
+                      errorMessage={messages.youtubeUrl}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Input
+                      label="Twitch"
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          profile: {
+                            ...prevForm.profile,
+                            twitchUrl: event.target.value,
+                          },
+                        }))
+                      }
+                      fieldValue={personalForm.profile?.twitchUrl}
+                      placeholder="Insira a url do seu canal"
+                      type="text"
+                      name="twitchUrl"
+                      id="twitchUrl"
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      error={errors.twitchUrl}
+                      errorMessage={messages.twitchUrl}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Select
+                      label="Jogo preferido"
+                      id="game"
+                      name="game"
+                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:border-dark-blue md:text-sm"
+                      options={games}
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          profile: {
+                            ...prevForm.profile,
+                            favoriteGame: games.find(
+                              (game) => event.target.value === game.value
+                            ),
+                          },
+                        }))
+                      }
+                      fieldValue={personalForm.profile?.favoriteGame?.value}
+                      error={false}
+                      errorMessage={""}
                     />
                   </div>
                   {errors.nothingToEdit && (

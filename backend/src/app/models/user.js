@@ -1,6 +1,24 @@
 const mongoose = require("../../database");
 const bcrypt = require("bcryptjs");
 
+const OptionSchema = new mongoose.Schema({
+  value: {
+    type: String,
+  },
+  label: {
+    type: String,
+  },
+});
+
+const MainCharacterSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  gameId: {
+    type: String,
+  },
+});
+
 const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String,
@@ -11,14 +29,11 @@ const ProfileSchema = new mongoose.Schema({
   twitchUrl: {
     type: String,
   },
-  birthDate: {
-    type: Date,
-  },
-  mainCharacter: {
-    type: [String],
+  mainCharacters: {
+    type: [MainCharacterSchema],
   },
   favoriteGame: {
-    type: String,
+    type: OptionSchema,
   },
 });
 
@@ -60,6 +75,9 @@ const UserSchema = new mongoose.Schema({
     default: Date.now,
   },
   phone: {
+    type: String,
+  },
+  birthDate: {
     type: String,
   },
   profile: ProfileSchema,

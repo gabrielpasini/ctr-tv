@@ -7,7 +7,7 @@ type Games = {
   optionsGames: OptionType[];
 };
 
-type Game = {
+export type Game = {
   _id: string;
   name: string;
   coverUrl: string;

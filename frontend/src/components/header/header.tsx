@@ -25,7 +25,7 @@ type NavItem = {
 };
 
 const initialUserNavigation = [
-  { name: "Editar meus dados", href: "/editar-meus-dados" },
+  { name: "Editar dados pessoais", href: "/editar-perfil" },
   {
     name: "Sair",
     href: "/login",

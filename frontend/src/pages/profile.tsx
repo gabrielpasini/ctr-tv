@@ -1,57 +1,70 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth";
-import Axios from "../../services/axios";
+import { AuthContext, ProfileType } from "../contexts/auth";
+import Axios from "../services/axios";
 
-type UrlParams = {
-  id: string;
+type UserProfile = {
   username: string;
+  name: string;
+  lastname: string;
+  profile: ProfileType;
 };
 
 export default function Profile() {
   const navigate = useNavigate();
   const { loggedUser } = useContext(AuthContext);
-  const [urlParams, setUrlParams] = useState<UrlParams>({
-    id: "",
-    username: "",
-  });
-  const [isMyProfile, setisMyProfile] = useState(false);
+  const [userParam, setUserParam] = useState("");
+  const [isMyProfile, setIsMyProfile] = useState(false);
+  const [profile, setProfile] = useState<UserProfile | undefined>();
+
+  console.log({ profile, isMyProfile });
 
   function redirect(route: string) {
     navigate(route);
   }
 
-  async function getUserProfile({ id, username }: UrlParams) {
-    console.log({ id, username });
-    // TODO: buscar profile na API;
+  async function getUserProfile(
+    userParam: string
+  ): Promise<UserProfile | undefined> {
+    const { data: userProfile }: { data: UserProfile } = await Axios.get(
+      `user/get-profile?username=${userParam}`
+    );
+    setProfile(userProfile);
+    return userProfile ?? undefined;
   }
 
   useEffect(() => {
     if (window.location.search) {
       const query = new URLSearchParams(window.location.search);
-      const usernameParam = query.get("username");
-      const idParam = query.get("id");
-      const params = { id: idParam ?? "", username: usernameParam ?? "" };
-      setUrlParams(params);
-      getUserProfile(params);
+      const userParam = query.get("username");
+      if (userParam) {
+        setUserParam(userParam ?? "");
+        getUserProfile(userParam).then((profileReturned) => {
+          if (!profileReturned) redirect("/");
+        });
+      }
     } else {
       redirect("/");
     }
   }, [window.location.search]);
 
   useEffect(() => {
-    if (loggedUser && loggedUser.username === urlParams.username) {
-      setisMyProfile(true);
+    if (loggedUser && loggedUser.username === userParam) {
+      setIsMyProfile(true);
     }
-  }, [loggedUser]);
+  }, [loggedUser, userParam]);
 
   return (
     <div className="max-w-7xl pt-4 md:pt-0 mx-auto px-4">
       <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
         <div className="px-4 py-5 bg-light md:p-6">
           <h1 className="font-crash text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
-            {loggedUser?.username}
+            {profile?.username}
           </h1>
+          <h1 className="font font-extrabold tracking-tight text-gray-900 md:text-6xl">
+            {profile?.name} {profile?.lastname}
+          </h1>
+          <h1 className="font font-extrabold tracking-tight text-gray-900 md:text-6xl"></h1>
         </div>
         {isMyProfile && (
           <div className="px-4 py-3 md:px-6 bg-dark-20 flex items-center justify-between">
