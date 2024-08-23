@@ -114,7 +114,7 @@ export default function Header({ setHeight }: HeaderProps) {
   }
 
   return (
-    <Container ref={ref}>
+    <Container ref={ref} style={{ zIndex: 3 }}>
       <Disclosure as="nav" className="bg-light shadow-lg">
         {({ open, close }: any) => (
           <>
