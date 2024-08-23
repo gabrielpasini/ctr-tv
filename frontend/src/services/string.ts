@@ -49,3 +49,17 @@ export function validateEmail(email: string) {
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+export function calculateAge(birthDate: string): number {
+  const dateArr = birthDate.split("/").reverse();
+  const dateBirthDate = new Date(
+    Number(dateArr[0]),
+    Number(dateArr[1]) - 1,
+    Number(dateArr[2])
+  );
+
+  const diffMs = Date.now() - dateBirthDate.getTime();
+  const ageDate = new Date(diffMs);
+
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}

@@ -7,6 +7,7 @@ import Axios from "../../services/axios";
 import Cookies from "js-cookie";
 import { Game } from "../tournament/create-tournament";
 import Select, { OptionType } from "../../components/select/select";
+import Textarea from "../../components/textarea/textarea";
 
 const enum EditMode {
   PERSONAL_DATA = "PERSONAL_DATA",
@@ -433,6 +434,29 @@ export default function EditProfile() {
                       className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
                       error={errors.twitchUrl}
                       errorMessage={messages.twitchUrl}
+                    />
+                  </div>
+                  <div className="col-span-6 md:col-span-4">
+                    <Textarea
+                      label="Bio"
+                      onFieldChange={(event) =>
+                        setPersonalForm((prevForm) => ({
+                          ...prevForm,
+                          profile: {
+                            ...prevForm.profile,
+                            bio: event.target.value,
+                          },
+                        }))
+                      }
+                      fieldValue={personalForm.profile?.bio}
+                      placeholder="Escreva sobre você..."
+                      name="bio"
+                      id="bio"
+                      rows={5}
+                      maxLength={300}
+                      className="mt-1 focus:border-highlight block w-full shadow-sm md:text-sm border-gray-300 rounded-md"
+                      error={errors.bio}
+                      errorMessage={messages.bio}
                     />
                   </div>
                   <div className="col-span-6 md:col-span-4">

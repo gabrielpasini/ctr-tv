@@ -8,12 +8,12 @@ router.get("/get-profile", async (req, res) => {
   try {
     const user = await User.findOne({ username });
     const userProfile = {
+      _id: user._id,
       username: user.username,
       name: user.name,
       lastname: user.lastname,
-      phone: user.phone,
       birthDate: user.birthDate,
-      ...user.profile,
+      profile: user.profile,
     };
     return res.status(200).send(userProfile);
   } catch (err) {

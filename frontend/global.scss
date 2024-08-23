@@ -78,6 +78,14 @@ pre {
   background: var(--dark-color);
 }
 
+.bg-red {
+  background: #ff0000;
+}
+
+.bg-purple {
+  background: #5a3e85;
+}
+
 .bg-highlight-20,
 .hover\:bg-highlight-20:hover {
   background: var(--highlight-color-20);

@@ -24,6 +24,7 @@ export type Character = {
 };
 
 export type ProfileType = {
+  picture?: string;
   bio?: string;
   youtubeUrl?: string;
   twitchUrl?: string;

@@ -20,6 +20,9 @@ const MainCharacterSchema = new mongoose.Schema({
 });
 
 const ProfileSchema = new mongoose.Schema({
+  picture: {
+    type: String,
+  },
   bio: {
     type: String,
   },
