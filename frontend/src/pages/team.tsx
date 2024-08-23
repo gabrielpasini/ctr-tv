@@ -17,7 +17,7 @@ export default function Team() {
   return (
     <div className="bg-dark w-full h-full">
       <div className="w-full pt-8 px-4 relative max-w-7xl mx-auto md:static">
-        <h1 className="font-crash text-4xl font font-extrabold tracking-tight text-white md:text-6xl mb-4">
+        <h1 className="font-crash-cartoon text-4xl font font-extrabold tracking-tight text-white md:text-6xl mb-4">
           Quem somos
         </h1>
         {team.map((member, index) => (

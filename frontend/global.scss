@@ -53,8 +53,20 @@ pre {
   animation: downBouncing 0.3s infinite alternate;
 }
 
-.font-crash {
-  font-family: ComicsCarToon;
+.font-crash-like {
+  font-family: crash-a-like;
+  font-weight: bolder;
+  background: linear-gradient(0deg, #ff0000, #ff3300, #ffc400, #ffc400);
+  text-transform: uppercase;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.05rem #000;
+}
+
+.font-crash-cartoon {
+  font-family: ComicsCartoon;
+  font-weight: bolder;
   background: linear-gradient(0deg, #ff0000, #ff3300, #ffc400, #ffc400);
   text-transform: uppercase;
   background-clip: text;
@@ -292,7 +304,7 @@ pre {
   text-align: left;
   border-radius: 8px;
   right: 8px;
-  top: 8px;
+  top: 72px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 

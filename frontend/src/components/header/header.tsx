@@ -62,7 +62,10 @@ export default function Header({ setHeight }: HeaderProps) {
   }, [ref?.current?.clientHeight, activePath]);
 
   useEffect(() => {
-    if (loggedUser) {
+    if (
+      loggedUser &&
+      !userNavigation.some((nav) => nav.href.includes("/perfil"))
+    ) {
       setUserNavigation((prevNav) => [
         {
           name: "Meu perfil",
@@ -70,6 +73,14 @@ export default function Header({ setHeight }: HeaderProps) {
         },
         ...prevNav,
       ]);
+    } else if (loggedUser) {
+      const newNavigation = userNavigation.map((nav) => {
+        if (nav.href.includes("/perfil")) {
+          nav.href = `/perfil?username=${loggedUser.username}`;
+        }
+        return nav;
+      });
+      setUserNavigation(newNavigation);
     }
   }, [loggedUser]);
 

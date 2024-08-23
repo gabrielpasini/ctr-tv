@@ -65,17 +65,17 @@ export default function Profile() {
           {user?.profile.picture ? (
             <img
               style={{ width: 100, height: 100 }}
-              className="mb-4 rounded-full"
+              className="border-4 border-dark mb-4 rounded-full"
               src={user?.profile.picture}
               alt={user?.username}
             />
           ) : (
             <FiUser
               style={{ width: 100, height: 100 }}
-              className="mb-4 rounded-full bg-dark text-light"
+              className="border-4 border-dark mb-4 rounded-full bg-dark text-light"
             />
           )}
-          <h1 className="font-crash text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
+          <h1 className="font-crash-like text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
             {user?.username}
           </h1>
           {user?.profile.bio && (
@@ -109,7 +109,9 @@ export default function Profile() {
                 <a
                   target="_blank"
                   href={user?.profile.twitchUrl}
-                  className="ml-2 inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-purple hover:opacity-75"
+                  className={`${
+                    user?.profile.youtubeUrl ? "ml-2" : ""
+                  } inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-purple hover:opacity-75`}
                 >
                   Twitch
                   <img
