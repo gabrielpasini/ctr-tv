@@ -8,6 +8,9 @@ import Cookies from "js-cookie";
 import { Game } from "../tournament/create-tournament";
 import Select, { OptionType } from "../../components/select/select";
 import Textarea from "../../components/textarea/textarea";
+import { FiUser } from "react-icons/fi";
+import { TbFileUpload } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 const enum EditMode {
   PERSONAL_DATA = "PERSONAL_DATA",
@@ -38,7 +41,11 @@ const initialPasswordForm = {
   confirmPassword: "",
 };
 
+const acceptedImageTypes = "image/png, image/jpeg, image/jpg";
+
 export default function EditProfile() {
+  const navigate = useNavigate();
+
   const { setLoggedUser, loggedUser } = useContext(AuthContext);
 
   const [personalForm, setPersonalForm] =
@@ -48,10 +55,9 @@ export default function EditProfile() {
   const [editMode, setEditMode] = useState(EditMode.PERSONAL_DATA);
   const [games, setGames] = useState<OptionType[]>([{ label: "", value: "" }]);
 
+  const [uploadError, setUploadError] = useState<string | undefined>();
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const [messages, setMessages] = useState<{ [key: string]: string }>({});
-
-  console.log(personalForm);
 
   useEffect(() => {
     getGames();
@@ -134,13 +140,14 @@ export default function EditProfile() {
         token,
         password,
       });
+      navigate(`/perfil?username=${loggedUser?.username}`);
     }
   };
 
   const savePersonalData = async () => {
     const { username, name, lastname, email, phone, birthDate, profile } =
       personalForm;
-    const { bio, youtubeUrl, twitchUrl, mainCharacters, favoriteGame } =
+    const { avatar, bio, youtubeUrl, twitchUrl, mainCharacters, favoriteGame } =
       profile ?? {};
 
     const errorFields: { [key: string]: boolean } = {};
@@ -208,6 +215,7 @@ export default function EditProfile() {
       phone: loggedUser?.phone,
       birthDate: loggedUser?.birthDate,
       profile: {
+        avatar: loggedUser?.profile?.avatar,
         bio: loggedUser?.profile?.bio,
         youtubeUrl: loggedUser?.profile?.youtubeUrl,
         twitchUrl: loggedUser?.profile?.twitchUrl,
@@ -224,6 +232,7 @@ export default function EditProfile() {
       phone: phone && phone.replace(/[^\d]/g, ""),
       birthDate,
       profile: {
+        avatar,
         bio,
         youtubeUrl,
         twitchUrl,
@@ -249,12 +258,50 @@ export default function EditProfile() {
       } = await Axios.put("user/edit-user", {
         token,
         editedData: newData,
+        isEditedAvatar: legacyData?.profile.avatar !== newData?.profile.avatar,
         isEditedEmail: legacyData?.email !== newData?.email,
         isEditedUsername: legacyData?.username !== newData?.username,
       });
       setLoggedUser(user);
+      navigate(`/perfil?username=${user.username}`);
     }
   };
+
+  async function onChangeAvatar(event: any) {
+    try {
+      const file = event.target.files?.[0];
+      if (file.type === "" || !acceptedImageTypes.includes(file.type)) {
+        setUploadError("Tipo de arquivo inválido");
+        return;
+      }
+      if (file.size > 1048576) {
+        setUploadError("A imagem é muito grande, máx. 1MB");
+        return;
+      }
+      const formData = new FormData();
+      formData.append("userId", loggedUser?._id ?? "");
+      formData.append("file", file);
+      const headers = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const {
+        data: { path },
+      }: any = await Axios.post("user/upload-image", formData, headers);
+
+      setUploadError(undefined);
+      setPersonalForm((prevForm) => ({
+        ...prevForm,
+        profile: {
+          ...prevForm.profile,
+          avatar: path,
+        },
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
@@ -275,6 +322,47 @@ export default function EditProfile() {
             <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
               <div className="px-4 py-5 bg-light md:p-6">
                 <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 md:col-span-4">
+                    <div
+                      style={{ width: 100, height: 100 }}
+                      className="overflow-hidden flex hover:opacity-75 bg-dark rounded-full"
+                    >
+                      {personalForm?.profile?.avatar ? (
+                        <img
+                          height="100"
+                          width="100"
+                          src={`${import.meta.env.VITE_BACKEND_URL}${
+                            personalForm?.profile.avatar
+                          }`}
+                          alt={personalForm?.username}
+                        />
+                      ) : (
+                        <FiUser size={100} color="fff" />
+                      )}
+                      <div
+                        style={{ zIndex: 1, width: 100, height: 100 }}
+                        className="absolute flex flex-col items-center justify-center bg-dark-60 rounded-full"
+                      >
+                        <TbFileUpload size={40} color="fff" />
+                        <span className="text-xs text-white">Alterar</span>
+                      </div>
+                      <input
+                        type="file"
+                        name="avatar"
+                        accept={acceptedImageTypes}
+                        onChange={onChangeAvatar}
+                        style={{ zIndex: 2, width: 100, height: 100 }}
+                        className="absolute pointer clear-inputfile rounded-full"
+                      />
+                    </div>
+                    {uploadError && (
+                      <div className="col-span-6 md:col-span-4">
+                        <p className="text-sm font-small text-red-500">
+                          {uploadError}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <div className="col-span-6 md:col-span-4">
                     <Input
                       label="Nome de usuário"

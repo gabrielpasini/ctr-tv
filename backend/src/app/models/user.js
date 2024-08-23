@@ -20,7 +20,7 @@ const MainCharacterSchema = new mongoose.Schema({
 });
 
 const ProfileSchema = new mongoose.Schema({
-  picture: {
+  avatar: {
     type: String,
   },
   bio: {

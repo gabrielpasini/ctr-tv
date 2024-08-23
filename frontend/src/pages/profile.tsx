@@ -21,8 +21,6 @@ export default function Profile() {
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [user, setUserProfile] = useState<UserProfile | undefined>();
 
-  console.log({ user, isMyProfile });
-
   function redirect(route: string) {
     navigate(route);
   }
@@ -62,20 +60,20 @@ export default function Profile() {
     <div className="max-w-7xl pt-4 md:pt-0 mx-auto px-4">
       <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
         <div className="px-4 py-5 bg-light md:p-6">
-          {user?.profile.picture ? (
+          {user?.profile.avatar ? (
             <img
               style={{ width: 100, height: 100 }}
-              className="border-4 border-dark mb-4 rounded-full"
-              src={user?.profile.picture}
+              className="bg-dark rounded-full"
+              src={`${import.meta.env.VITE_BACKEND_URL}${user?.profile.avatar}`}
               alt={user?.username}
             />
           ) : (
             <FiUser
               style={{ width: 100, height: 100 }}
-              className="border-4 border-dark mb-4 rounded-full bg-dark text-light"
+              className="rounded-full bg-dark text-light"
             />
           )}
-          <h1 className="font-crash-like text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
+          <h1 className="font-crash-like text-6xl font font-extrabold tracking-tight text-gray-900">
             {user?.username}
           </h1>
           {user?.profile.bio && (
@@ -89,7 +87,7 @@ export default function Profile() {
             </>
           )}
           {(user?.profile.youtubeUrl || user?.profile.twitchUrl) && (
-            <div className="mb-2 mt-4 flex flex-row direction-row items-center">
+            <div className="mb-2 mt-4 flex flex-row items-center">
               {user?.profile.youtubeUrl && (
                 <a
                   target="_blank"

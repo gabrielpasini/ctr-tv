@@ -255,6 +255,11 @@ pre {
   cursor: default;
 }
 
+.clear-inputfile,
+.clear-inputfile:focus {
+  opacity: 0;
+}
+
 .xs-flex-row {
   flex-direction: column;
 }

@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiUser } from "react-icons/fi";
 import { AuthContext } from "../../contexts/auth";
 import { Container, MenuItems, UserIcon } from "./styles";
 import { routes } from "../../Routes";
@@ -162,8 +163,22 @@ export default function Header({ setHeight }: HeaderProps) {
                   {isAuthenticated ? (
                     <Menu as="div" className="pointer ml-3 relative">
                       <div>
-                        <Menu.Button className="max-w-xs bg-dark rounded-full flex items-center text-sm focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-white hover:bg-highlight-60">
-                          <UserIcon />
+                        <Menu.Button className="max-w-xs bg-dark rounded-full overflow-hidden flex items-center text-sm focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-white hover:bg-highlight-60">
+                          {loggedUser?.profile?.avatar ? (
+                            <img
+                              height="24"
+                              width="24"
+                              src={`${import.meta.env.VITE_BACKEND_URL}${
+                                loggedUser?.profile.avatar
+                              }`}
+                            />
+                          ) : (
+                            <FiUser
+                              size={24}
+                              color="fff"
+                              className="my-1 mx-1"
+                            />
+                          )}
                         </Menu.Button>
                       </div>
                       <MenuItems className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg pt-1 bg-light ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -260,8 +275,19 @@ export default function Header({ setHeight }: HeaderProps) {
                 </div>
                 <div className="pt-4 pb-3 border-t border-dark">
                   <div className="flex items-center px-5">
-                    <div className="flex-shrink-0 bg-dark rounded-full flex items-center text-sm">
-                      {isAuthenticated && <UserIcon />}
+                    <div className="flex-shrink-0 bg-dark rounded-full flex items-center text-sm overflow-hidden">
+                      {isAuthenticated &&
+                        (loggedUser?.profile?.avatar ? (
+                          <img
+                            height="24"
+                            width="24"
+                            src={`${import.meta.env.VITE_BACKEND_URL}${
+                              loggedUser?.profile.avatar
+                            }`}
+                          />
+                        ) : (
+                          <FiUser size={24} color="fff" className="my-1 mx-1" />
+                        ))}
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-gray-500">
