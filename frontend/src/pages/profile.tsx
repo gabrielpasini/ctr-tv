@@ -60,82 +60,96 @@ export default function Profile() {
     <div className="max-w-7xl pt-4 md:pt-0 mx-auto px-4">
       <div className="bg-light shadow mb-14 overflow-hidden rounded-md">
         <div className="px-4 py-5 bg-light md:p-6">
-          {user?.profile.avatar ? (
-            <img
-              style={{ width: 100, height: 100 }}
-              className="bg-dark rounded-full"
-              src={`${import.meta.env.VITE_BACKEND_URL}${user?.profile.avatar}`}
-              alt={user?.username}
-            />
-          ) : (
-            <FiUser
-              style={{ width: 100, height: 100 }}
-              className="rounded-full bg-dark text-light"
-            />
-          )}
-          <h1 className="font-crash-like text-6xl font font-extrabold tracking-tight text-gray-900">
-            {user?.username}
-          </h1>
-          {user?.profile.bio && (
-            <>
-              <h1 className="font tracking-tight text-gray-900">Sobre:</h1>
-              <pre>
-                <h1 className="px-2 py-2 border border-dark bg-dark-20 rounded-md font tracking-tight text-gray-900">
-                  {user?.profile.bio}
-                </h1>
-              </pre>
-            </>
-          )}
-          {(user?.profile.youtubeUrl || user?.profile.twitchUrl) && (
-            <div className="mb-2 mt-4 flex flex-row items-center">
-              {user?.profile.youtubeUrl && (
-                <a
-                  target="_blank"
-                  href={user?.profile.youtubeUrl}
-                  className="inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-red hover:opacity-75"
-                >
-                  Youtube
-                  <img
-                    style={{ width: 24, height: 24 }}
-                    className="ml-2"
-                    src="https://i.imgur.com/QhSaRgM.png"
-                    alt="youtube logo"
-                  />
-                </a>
-              )}
-              {user?.profile.twitchUrl && (
-                <a
-                  target="_blank"
-                  href={user?.profile.twitchUrl}
-                  className={`${
-                    user?.profile.youtubeUrl ? "ml-2" : ""
-                  } inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-purple hover:opacity-75`}
-                >
-                  Twitch
-                  <img
-                    style={{ width: 24, height: 24 }}
-                    className="ml-2"
-                    src="https://i.imgur.com/febkonn.png"
-                    alt="twitch logo"
-                  />
-                </a>
+          <div className="grid grid-cols-6 gap-2">
+            <div className="col-span-6 md:col-span-4">
+              {user?.profile.avatar ? (
+                <img
+                  style={{ width: 100, height: 100 }}
+                  className="bg-dark rounded-full"
+                  src={`${import.meta.env.VITE_BACKEND_URL}${
+                    user?.profile.avatar
+                  }`}
+                  alt={user?.username}
+                />
+              ) : (
+                <FiUser
+                  style={{ width: 100, height: 100 }}
+                  className="rounded-full bg-dark text-light"
+                />
               )}
             </div>
-          )}
-          <h1 className="font tracking-tight text-gray-900">
-            Nome: {user?.name} {user?.lastname}
-          </h1>
-          {user?.birthDate && (
-            <h1 className="font tracking-tight text-gray-900">
-              Idade: {calculateAge(user.birthDate)} anos
-            </h1>
-          )}
-          {user?.profile.favoriteGame && (
-            <h1 className="font tracking-tight text-gray-900">
-              Jogo preferido: {user?.profile.favoriteGame.label}
-            </h1>
-          )}
-          <h1 className="font tracking-tight text-gray-900"></h1>
+            <div className="col-span-6 md:col-span-4">
+              <h1 className="font-crash-like text-6xl font font-extrabold tracking-tight text-gray-900">
+                {user?.username}
+              </h1>
+            </div>
+            {user?.profile.bio && (
+              <div className="col-span-6 md:col-span-4">
+                <h1 className="font tracking-tight text-gray-900">Sobre:</h1>
+                <pre>
+                  <p className="px-2 py-2 col-span-6 md:col-span-4 border border-dark bg-dark-20 rounded-md font tracking-tight text-gray-900">
+                    {user?.profile.bio}
+                  </p>
+                </pre>
+              </div>
+            )}
+            {(user?.profile.youtubeUrl || user?.profile.twitchUrl) && (
+              <div className="col-span-6 md:col-span-4 mb-2 mt-4 flex flex-row items-center">
+                {user?.profile.youtubeUrl && (
+                  <a
+                    target="_blank"
+                    href={user?.profile.youtubeUrl}
+                    className="inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-red hover:opacity-75"
+                  >
+                    Youtube
+                    <img
+                      style={{ width: 24, height: 24 }}
+                      className="ml-2"
+                      src="https://i.imgur.com/QhSaRgM.png"
+                      alt="youtube logo"
+                    />
+                  </a>
+                )}
+                {user?.profile.twitchUrl && (
+                  <a
+                    target="_blank"
+                    href={user?.profile.twitchUrl}
+                    className={`${
+                      user?.profile.youtubeUrl ? "ml-2" : ""
+                    } inline-flex justify-center items-center py-1 px-2 shadow-sm text-sm font-medium rounded-md text-white bg-purple hover:opacity-75`}
+                  >
+                    Twitch
+                    <img
+                      style={{ width: 24, height: 24 }}
+                      className="ml-2"
+                      src="https://i.imgur.com/febkonn.png"
+                      alt="twitch logo"
+                    />
+                  </a>
+                )}
+              </div>
+            )}
+            <div className="col-span-6 md:col-span-4">
+              <h1 className="font tracking-tight text-gray-900">
+                Nome: {user?.name} {user?.lastname}
+              </h1>
+            </div>
+            {user?.birthDate && (
+              <div className="col-span-6 md:col-span-4">
+                <h1 className="font tracking-tight text-gray-900">
+                  Idade: {calculateAge(user.birthDate)} anos
+                </h1>
+              </div>
+            )}
+            {user?.profile.favoriteGame && (
+              <div className="col-span-6 md:col-span-4">
+                <h1 className="font tracking-tight text-gray-900">
+                  Jogo preferido: {user?.profile.favoriteGame.label}
+                </h1>
+              </div>
+            )}
+            <h1 className="font tracking-tight text-gray-900"></h1>
+          </div>
         </div>
         {isMyProfile && (
           <div className="px-4 py-3 md:px-6 bg-dark-20 flex items-center justify-between">
