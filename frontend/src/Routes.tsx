@@ -3,13 +3,13 @@ import {
   Home,
   Login,
   Register,
-  EditMyData,
   ResetPassword,
   Community,
   Team,
   TermsOfUse,
   CreateTournament,
   EditProfile,
+  Profile,
 } from "./pages";
 import PrivateRoute from "./private-route";
 import { ReactElement } from "react";
@@ -27,16 +27,15 @@ export const routes: RouteProps[] = [
   { title: "Login", path: "/login", element: <Login /> },
   { title: "Cadastro", path: "/cadastro", element: <Register /> },
   {
-    title: "Editar dados",
-    path: "/editar-meus-dados",
-    element: <EditMyData />,
-    private: true,
-  },
-  {
     title: "Editar perfil",
     path: "/editar-perfil",
     element: <EditProfile />,
     private: true,
+  },
+  {
+    title: "Perfil",
+    path: "/perfil",
+    element: <Profile />,
   },
   {
     title: "Redefinir senha",

@@ -3,7 +3,7 @@ export default function Community() {
     <div className="bg-light w-full h-full">
       <div className="pt-8 pb-16 max-w-7xl mx-auto px-4 flex xs-flex-col justify-between">
         <div className="md:max-w-lg md:pr-8">
-          <h1 className="text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
+          <h1 className="font-crash-cartoon text-4xl font font-extrabold tracking-tight text-gray-900 md:text-6xl">
             Comunidade
           </h1>
           <p className="mt-4 text-xl text-gray-500">

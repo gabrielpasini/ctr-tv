@@ -4,10 +4,22 @@
 
 * {
   font-family: Poppins;
+  --highlight-color: #ff6600;
+  --highlight-color-60: #ff6600bf;
+  --highlight-color-40: #ff66007f;
+  --highlight-color-20: #ff66003f;
+  --light-color: #eeeeee;
+  --light-color-60: #eeeeeebf;
+  --light-color-40: #eeeeee7f;
+  --light-color-20: #eeeeee3f;
+  --dark-color: #777777;
+  --dark-color-60: #777777bf;
+  --dark-color-40: #7777777f;
+  --dark-color-20: #7777773f;
 }
 
 body {
-  background-color: #777;
+  background-color: var(--dark-color);
 }
 
 pre {
@@ -41,151 +53,181 @@ pre {
   animation: downBouncing 0.3s infinite alternate;
 }
 
+.font-crash-like {
+  font-family: crash-a-like;
+  font-weight: bolder;
+  background: linear-gradient(0deg, #ff0000, #ff3300, #ffc400, #ffc400);
+  text-transform: uppercase;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.05rem #000;
+}
+
+.font-crash-cartoon {
+  font-family: ComicsCartoon;
+  font-weight: bolder;
+  background: linear-gradient(0deg, #ff0000, #ff3300, #ffc400, #ffc400);
+  text-transform: uppercase;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.1rem #000;
+}
+
 .bg-highlight,
 .hover\:bg-highlight:hover {
-  background: #30a2ff;
+  background: var(--highlight-color);
 }
 
 .bg-light,
 .hover\:bg-light:hover {
-  background: #eee;
+  background: var(--light-color);
 }
 
 .bg-dark,
 .hover\:bg-dark:hover {
-  background: #777;
+  background: var(--dark-color);
+}
+
+.bg-red {
+  background: #ff0000;
+}
+
+.bg-purple {
+  background: #5a3e85;
 }
 
 .bg-highlight-20,
 .hover\:bg-highlight-20:hover {
-  background: rgba(48, 162, 255, 0.2);
+  background: var(--highlight-color-20);
 }
 
 .bg-highlight-40,
 .hover\:bg-highlight-40:hover {
-  background: rgba(48, 162, 255, 0.4);
+  background: var(--highlight-color-40);
 }
 
 .bg-highlight-60,
 .hover\:bg-highlight-60:hover {
-  background: rgba(48, 162, 255, 0.6);
+  background: var(--highlight-color-60);
 }
 
 .bg-light-20,
 .hover\:bg-light-20:hover {
-  background: rgba(238, 238, 238, 0.2);
+  background: var(--light-color-20);
 }
 
 .bg-light-40,
 .hover\:bg-light-40:hover {
-  background: rgba(238, 238, 238, 0.4);
+  background: var(--light-color-40);
 }
 
 .bg-light-60,
 .hover\:bg-light-60:hover {
-  background: rgba(238, 238, 238, 0.6);
+  background: var(--light-color-60);
 }
 
 .bg-dark-20,
 .hover\:bg-dark-20:hover {
-  background: rgba(119, 119, 119, 0.2);
+  background: var(--dark-color-20);
 }
 
 .bg-dark-40,
 .hover\:bg-dark-40:hover {
-  background: rgba(119, 119, 119, 0.4);
+  background: var(--dark-color-40);
 }
 
 .bg-dark-60,
 .hover\:bg-dark-60:hover {
-  background: rgba(119, 119, 119, 0.6);
+  background: var(--dark-color-60);
 }
 
 .text-highlight,
 .hover\:text-highlight:hover {
-  color: #30a2ff;
+  color: var(--highlight-color);
 }
 
 .text-light,
 .hover\:text-light:hover {
-  color: #eee;
+  color: var(--light-color);
 }
 
 .text-dark,
 .hover\:text-dark:hover {
-  color: #777;
+  color: var(--dark-color);
 }
 
 .text-highlight-20,
 .hover\:text-highlight-20:hover {
-  color: rgba(48, 162, 255, 0.2);
+  color: var(--highlight-color-20);
 }
 
 .text-highlight-40,
 .hover\:text-highlight-40:hover {
-  color: rgba(48, 162, 255, 0.4);
+  color: var(--highlight-color-40);
 }
 
 .text-highlight-60,
 .hover\:text-highlight-60:hover {
-  color: rgba(48, 162, 255, 0.6);
+  color: var(--highlight-color-60);
 }
 
 .text-light-20,
 .hover\:text-light-20:hover {
-  color: rgba(238, 238, 238, 0.2);
+  color: var(--light-color-20);
 }
 
 .text-light-40,
 .hover\:text-light-40:hover {
-  color: rgba(238, 238, 238, 0.4);
+  color: var(--light-color-40);
 }
 
 .text-light-60,
 .hover\:text-light-60:hover {
-  color: rgba(238, 238, 238, 0.6);
+  color: var(--light-color-60);
 }
 
 .text-dark-20,
 .hover\:text-dark-20:hover {
-  color: rgba(119, 119, 119, 0.2);
+  color: var(--dark-color-20);
 }
 
 .text-dark-40,
 .hover\:text-dark-40:hover {
-  color: rgba(119, 119, 119, 0.4);
+  color: var(--dark-color-40);
 }
 
 .text-dark-60,
 .hover\:text-dark-60:hover {
-  color: rgba(119, 119, 119, 0.6);
+  color: var(--dark-color-60);
 }
 
 .border-highlight,
 .focus\:border-highlight:focus {
-  border-color: #30a2ff;
+  border-color: var(--highlight-color);
 }
 
 .border-light,
 .focus\:border-light:focus {
-  border-color: #eee;
+  border-color: var(--light-color);
 }
 
 .border-dark,
 .focus\:border-dark:focus {
-  border-color: #777;
+  border-color: var(--dark-color);
 }
 
 .border-b-highlight {
-  border-bottom: 2px solid #30a2ff;
+  border-bottom: 2px solid var(--highlight-color);
 }
 
 .border-b-dark {
-  border-bottom: 2px solid #777;
+  border-bottom: 2px solid var(--dark-color);
 }
 
 .border-b-light {
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid var(--light-color);
 }
 
 .text-wrap {
@@ -211,6 +253,11 @@ pre {
 
 .default {
   cursor: default;
+}
+
+.clear-inputfile,
+.clear-inputfile:focus {
+  opacity: 0;
 }
 
 .xs-flex-row {
@@ -262,7 +309,7 @@ pre {
   text-align: left;
   border-radius: 8px;
   right: 8px;
-  top: 8px;
+  top: 72px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 

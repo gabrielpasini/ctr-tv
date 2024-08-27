@@ -31,6 +31,8 @@ export default function RadioButton({
   onFieldChange,
   fieldValue,
 }: RadioProps): ReactElement {
+  const classNameNoRing = `${className} focus:outline-none focus:ring-0`;
+
   return (
     <>
       {label && (
@@ -54,9 +56,9 @@ export default function RadioButton({
               onChange={onFieldChange}
               defaultChecked={fieldValue === option.value}
               className={
-                error && className.includes("gray")
-                  ? className.replaceAll("gray", "red")
-                  : className
+                error && classNameNoRing.includes("gray")
+                  ? classNameNoRing.replaceAll("gray", "red")
+                  : classNameNoRing
               }
             />
             <label

@@ -7,7 +7,7 @@ type Games = {
   optionsGames: OptionType[];
 };
 
-type Game = {
+export type Game = {
   _id: string;
   name: string;
   coverUrl: string;
@@ -21,9 +21,7 @@ type Track = {
   minimapUrl: string;
 };
 
-const Types = [
-    { label: "", value: "" },
-]
+const Types = [{ label: "", value: "" }];
 
 export default function CreateTournament() {
   const [games, setGames] = useState<Games>();

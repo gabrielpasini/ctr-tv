@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
 
 router.get("/", async (req, res) => res.redirect(process.env.FRONTEND_URL));
 app.use("/", router);
+app.use("/files", express.static("./uploads"));
 
 require("../app/controllers/index")(app);
 

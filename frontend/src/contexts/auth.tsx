@@ -9,27 +9,36 @@ import { useNavigate } from "react-router-dom";
 import Axios from "../services/axios";
 import { routes, RouteProps } from "../Routes";
 import Cookies from "js-cookie";
+import { OptionType } from "../components/select/select";
 
 type AuthenticateDataType = {
-  email: string;
+  username: string;
   password: string;
   id?: string;
   createdAt?: Date;
 };
 
-type ProfileType = {
-  bio: string;
-  youtubeUrl: string;
-  twitchUrl: string;
-  birthDate: string;
-  mainCharacter: string;
-  favoriteGame: string;
+export type Character = {
+  name: string;
+  gameId: string;
+};
+
+export type ProfileType = {
+  avatar?: string;
+  bio?: string;
+  youtubeUrl?: string;
+  twitchUrl?: string;
+  mainCharacters?: Character[];
+  favoriteGame?: OptionType;
 };
 
 export type LoggedUser = {
+  username: string;
   name: string;
+  lastname: string;
   email: string;
   phone?: string;
+  birthDate?: string;
   profile?: ProfileType;
   createdAt?: string;
   _id?: string;
@@ -84,12 +93,12 @@ export const AuthProvider: any = ({ children }: any) => {
     }
   };
 
-  async function authenticate({ email, password }: AuthenticateDataType) {
+  async function authenticate({ username, password }: AuthenticateDataType) {
     try {
       const {
         data: { token, user },
       } = await Axios.post("/auth/authenticate", {
-        email,
+        username,
         password,
       });
 

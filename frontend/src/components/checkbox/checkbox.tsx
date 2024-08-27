@@ -22,6 +22,8 @@ export default function Checkbox({
   error,
   errorMessage,
 }: Checkbox) {
+  const classNameNoRing = `${className} focus:outline-none focus:ring-0`;
+
   return (
     <>
       <div className="flex items-center">
@@ -31,9 +33,9 @@ export default function Checkbox({
           checked={value}
           onChange={(event) => setValue(event.target.checked)}
           className={
-            error && className.includes("gray")
-              ? className.replaceAll("gray", "red")
-              : className
+            error && classNameNoRing.includes("gray")
+              ? classNameNoRing.replaceAll("gray", "red")
+              : classNameNoRing
           }
         />
         <label
