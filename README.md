@@ -19,6 +19,7 @@ Este projeto é dividido em duas partes: **frontend** e **backend**. Cada parte 
 1. Node
 2. Javascript
 3. Express
+4. MongoDB
 
 ### 2. Instalação das dependencias do Frontend e Backend
 
@@ -41,7 +42,16 @@ Apos isto instale as dependencias usando o yarn, este processo precisa ser repet
 yarn
 ```
 
-## 3. Rodando o projeto
+
+### 3. Criando arquivo .env
+
+Para o backend é necessario criar um arquivo .env com a chave do banco local para utiliza-lo, após instalar o mongodb, crie um arquivo .env na pasta do backend e coloque a chave do banco, como no exemplo abaixo.
+
+```
+MONGO_DB = "Chave do banco"
+```
+
+### 4. Rodando o projeto
 
 O frontend e backend pode ser executado com o seguinte comando nas respectivas pastas de cada um:
 
@@ -49,5 +59,5 @@ O frontend e backend pode ser executado com o seguinte comando nas respectivas p
 yarn dev
 ```
 
-### 4. Trabalhos futuros
+### 5. Trabalhos futuros
 - Integração com o CTR Online para fins de feedback em tempo real por meio de uma api.
